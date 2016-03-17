@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        maven {
+            url 'http://dl.bintray.com/cjstehno/public'
+        }
+    }
+    dependencies {
+        classpath 'gradle-templates:gradle-templates:1.5'
+    }
+}
+
+apply plugin: 'templates'
+
+// 插件使用方式
+// https://github.com/townsfolk/gradle-templates/wiki/Usage
+//新建web工程
+// gradle createWebappProject
+// 将工程转换为模块
+//file - new - module from existing sourses

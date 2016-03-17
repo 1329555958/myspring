@@ -1,0 +1,13 @@
+apply plugin: 'war'
+
+group = 'webtmpl'
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.4.0.BUILD-SNAPSHOT")
+}
+
+repositories {
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+}

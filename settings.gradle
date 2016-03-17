@@ -1,0 +1,3 @@
+include 'webtmpl', 'cron', 'jpa', 'jsonrpc', 'mail', 'mq'
+include 'test'
+
