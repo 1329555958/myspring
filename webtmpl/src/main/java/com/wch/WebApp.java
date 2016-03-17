@@ -2,9 +2,7 @@ package com.wch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by weichunhe on 2016/3/14.
@@ -12,11 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class WebApp {
-
-    @RequestMapping("/")
+    //判断是否可以从post中直接获取数据
+    // formData 和 requestPayload的区别
+    @RequestMapping(value = "/" ,method = RequestMethod.POST)
     @ResponseBody
-    String home() {
-        return "Hello World!";
+    public String home(@RequestParam String name) {
+        return "Hello " + (name == null ? "world" : name);
 
     }
 
