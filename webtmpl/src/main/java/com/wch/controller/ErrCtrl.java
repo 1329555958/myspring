@@ -1,6 +1,7 @@
 package com.wch.controller;
 
-import com.netfinworks.utils.HttpRequestUtils;
+
+import com.wch.utils.HttpRequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;

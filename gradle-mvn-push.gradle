@@ -1,0 +1,112 @@
+/******************************************************************************
+ * Copyright (C) 2015 Yevgeny Krasik                                          *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the "License");            *
+ * you may not use this file except in compliance with the License.           *
+ * You may obtain a copy of the License at                                    *
+ *                                                                            *
+ * http://www.apache.org/licenses/LICENSE-2.0                                 *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ ******************************************************************************/
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+group = getProperty('group')
+nexusUsername = getProperty('nexusUsername')
+nexusPassword = getProperty('nexusPassword')
+
+def buildType
+def nexusRepositoryUrl
+
+// Determine build type.
+if (hasProperty("release")) {
+    buildType = "release"
+    nexusRepositoryUrl = "http://nexus.vfinance.cn:9081/content/repositories/releases/"
+} else if (hasProperty("snapshot")) {
+    buildType = "snapshot"
+    version += "-SNAPSHOT"
+    nexusRepositoryUrl = "http://nexus.vfinance.cn:9081/content/repositories/snapshots/"
+} else {
+    buildType = "local"
+}
+
+repositories {
+    mavenCentral()
+}
+
+task artifactDocs(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+task artifactSources(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives artifactSources
+}
+
+signing {
+    required = false
+}
+
+if (buildType == "release") {
+    signing {
+        sign configurations.archives
+    }
+} else {
+    task signArchives << {
+        // do nothing
+    }
+}
+
+rootProject.ext {
+    confirmAsked = false
+}
+
+uploadArchives {
+    doFirst {
+        if (!confirmAsked) {
+            rootProject.ext.confirmAsked = true
+            println "Performing $buildType build : $version"
+            def console = System.console()
+            if (!console) {
+                throw new Exception("Error getting console!")
+            }
+            final String confirm = console.readLine('> Confirm(y/n): ')
+            if (confirm.toUpperCase() != "Y") {
+                throw new Exception("Aborted!")
+            }
+        }
+    }
+
+    repositories {
+        if (buildType == "local") {
+            mavenLocal()
+        } else {
+            mavenDeployer {
+                if (buildType == "release") {
+                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+                }
+
+                repository(url: nexusRepositoryUrl) {
+                    authentication(userName: nexusUsername, password: nexusPassword)
+                }
+
+                pom {
+                    version = version
+                    packaging = 'jar'
+                }
+            }
+        }
+    }
+}

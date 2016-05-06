@@ -1,0 +1,12 @@
+apply plugin: 'war'
+
+
+war<<{
+    copy {
+        from war.archivePath
+        into "$buildDir"
+        rename { String fileName ->
+            fileName.replace("-" + version, '')
+        }
+    }
+}

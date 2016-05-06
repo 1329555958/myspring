@@ -9,3 +9,4 @@ https://github.com/townsfolk/gradle-templates/wiki/Usage
 ## gradle文件中添加依赖后,iml文件不改变,找不到类
 * 开启自动导入功能
 `file - setting - Build,Execution,Depolyment - gradle - use auto import`
+

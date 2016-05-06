@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.*;
  * Created by weichunhe on 2016/3/14.
  */
 @SpringBootApplication
+//@PropertySource("file:/opt/pay/config/matrix/matrix-fmall/application.properties")
+//@ImportResource(value = { "classpath:applicationContext.xml" })
 @RestController
 public class WebApp {
     //判断是否可以从post中直接获取数据
     // formData 和 requestPayload的区别
-    @RequestMapping(value = "/" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String home(@RequestParam String name) {
         return "Hello " + (name == null ? "world" : name);

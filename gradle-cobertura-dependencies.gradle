@@ -1,0 +1,13 @@
+cobertura {
+    coverageFormats = ['xml', 'html']
+
+    rootProject.subprojects.each {
+        String subproject_name = it.name
+        configurations.testRuntime.each {
+            if (it.name.contains(subproject_name)) {
+                coverageDirs << file("../${subproject_name}/build/classes/main")
+            }
+        }
+    }
+}
+

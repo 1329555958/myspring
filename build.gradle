@@ -1,13 +1,113 @@
 buildscript {
     repositories {
         maven {
-            url 'http://dl.bintray.com/cjstehno/public'
+            url "http://nexus.vfinance.cn:9081/content/groups/public/"
+//            url 'http://dl.bintray.com/cjstehno/public'
         }
     }
+
     dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+        classpath("io.spring.gradle:dependency-management-plugin:0.4.1.RELEASE")
+        classpath('net.saliman:gradle-liquibase-plugin:1.0.0')
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.4"
+        classpath 'com.h2database:h2:1.3.160'
+        classpath 'mysql:mysql-connector-java:5.1.36'
+        classpath "com.ewerk.gradle.plugins:querydsl-plugin:1.0.3"
+        classpath("io.spring.gradle:dependency-management-plugin:0.4.1.RELEASE")
+        classpath("net.saliman:gradle-cobertura-plugin:2.2.8")
+        classpath("org.hibernate:hibernate-validator:5.1.3.Final")
+        classpath 'org.springframework:springloaded:1.2.3.RELEASE'
+        classpath 'no.nils:wsdl2java:0.6'
         classpath 'gradle-templates:gradle-templates:1.5'
     }
 }
 
 apply plugin: 'templates'
+apply plugin: 'idea'
+apply plugin: 'cobertura'
+apply plugin: 'sonar-runner'
 
+apply from: "$rootDir/dependencies.gradle"
+
+configure(allprojects) { project ->
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+repositories {
+    maven { url "http://nexus.vfinance.cn:9081/content/groups/public/" }
+    maven { url "http://repo.spring.io/release" }
+}
+
+//---sub project common config ---
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'cobertura'
+
+    repositories {
+        maven { url "http://nexus.vfinance.cn:9081/content/repositories/snapshots/" }
+        maven { url "http://nexus.vfinance.cn:9081/content/groups/public/" }
+    }
+
+    dependencies {
+        compile libs.common
+        compile libs.jackson
+        compile group: 'org.mapstruct', name: 'mapstruct-jdk8', version: mapstructVersion
+
+        testCompile libs.test
+    }
+
+    sonarRunner {
+        sonarProperties {
+            property "sonar.sourceEncoding", "UTF-8"
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+}
+
+cobertura {
+    // coveralls plugin depends on xml format report
+    coverageFormats = ['html', 'xml']
+    coverageEncoding = "UTF-8"
+    coverageMergeDatafiles = subprojects.collect {
+        new File(it.projectDir, '/build/cobertura/cobertura.ser')
+    }
+
+    coverageTestTasks {
+        project.tasks.matching {
+            it.name.contains("test") || it.name.contains("cucumber")
+        }
+    }
+
+    coverageSourceDirs = subprojects.collect {
+        it.sourceSets.main.java.srcDirs
+    }
+
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://10.65.213.16:7890"
+        property "sonar.jdbc.url", "jdbc:postgresql://127.0.0.1/sonar"  //only run on jenkins
+        property "sonar.jdbc.driverClassName", "org.postgresql.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "NetFinSonar"
+        property "sonar.core.codeCoveragePlugin", "cobertura"
+        property "sonar.cobertura.reportPath", "${buildDir}/reports/cobertura/coverage.xml"
+    }
+}
+
+test.dependsOn(subprojects.test)
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.8'
+}

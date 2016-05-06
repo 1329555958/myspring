@@ -1,0 +1,42 @@
+apply plugin: 'liquibase'
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+querydsl {
+    jpa = true
+}
+
+sourceSets {
+    querydsl {
+        java {
+            srcDir 'src/querydsl/java'
+        }
+    }
+    main {
+        java { srcDir 'src/main/java' }
+        resources { srcDir 'src/main/resources' }
+    }
+    test {
+        java { srcDir 'src/test/java' }
+        resources { srcDir 'src/test/resources' }
+    }
+}
+
+configurations {
+    querydslapt
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    compile "com.mysema.querydsl:querydsl-jpa:${qdslVersion}"
+    compile 'com.h2database:h2:1.3.160'
+    compile 'mysql:mysql-connector-java:5.1.29'
+    compile("org.liquibase:liquibase-core:3.3.5")
+
+    querydslapt "com.mysema.querydsl:querydsl-apt:${qdslVersion}"
+}
+
+idea {
+    module {
+        sourceDirs += file('src/querydsl/java')
+    }
+}
