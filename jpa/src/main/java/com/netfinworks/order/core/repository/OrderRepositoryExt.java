@@ -8,4 +8,5 @@ import com.netfinworks.order.core.entity.OrderEntity;
 public interface OrderRepositoryExt {
 
     public OrderEntity findByOrderNo(String orderNo);
+
 }

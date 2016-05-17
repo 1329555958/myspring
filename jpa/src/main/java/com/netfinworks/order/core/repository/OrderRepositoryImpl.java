@@ -19,4 +19,6 @@ public class OrderRepositoryImpl implements OrderRepositoryExt {
         Predicate predicate = qOrderEntity.orderNo.eq(orderNo);
         return orderRepository.findOne(predicate);
     }
+
+
 }

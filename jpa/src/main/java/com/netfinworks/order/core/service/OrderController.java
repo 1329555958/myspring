@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -55,5 +56,9 @@ public class OrderController {
         List<String> ids = new ArrayList<>();
         ids.add("11111");
         return null;
+    }
+    @RequestMapping("/findByType")
+    public Object find(@RequestParam String type){
+        return repository.findByOrderType(type);
     }
 }
