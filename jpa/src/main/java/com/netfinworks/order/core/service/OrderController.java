@@ -59,6 +59,11 @@ public class OrderController {
     }
     @RequestMapping("/findByType")
     public Object find(@RequestParam String type){
+
+        log.info("type:{}",JSONUtil.toJson( repository.findByOrderType(type)));
+        log.info("type2:{}",JSONUtil.toJson( repository.findByOrderType2(type)));
+        log.info("type3:{}",JSONUtil.toJson( repository.findByOrderType3(type)));
+//        log.info("orderNo and type:{}",JSONUtil.toJson(repository.findByOrderNoAndOrderType("9b692ea3-e5dd-4fb0-8cc4-c9c910fc3e08",type)));
         return repository.findByOrderType(type);
     }
 }

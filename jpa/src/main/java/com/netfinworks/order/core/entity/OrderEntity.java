@@ -154,6 +154,7 @@ public class OrderEntity {
         this.deleted = deleted;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

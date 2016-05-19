@@ -2,6 +2,9 @@ package com.netfinworks.order.core.repository;
 
 import com.netfinworks.order.core.App;
 import com.netfinworks.order.core.entity.OrderEntity;
+import com.netfinworks.order.core.projection.OrderProjection;
+import com.netfinworks.util.JSONUtil;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -32,7 +35,7 @@ public class OrderRepositoryTest {
         System.out.print("start test!");
     }
 
-    @Test
+    //    @Test
     public void saveTest() {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setId(UUID.randomUUID().toString());
@@ -50,6 +53,12 @@ public class OrderRepositoryTest {
         List<String> ids = new ArrayList<>();
         ids.add("11111");
         ids.add(orderEntity.getId());
-
+    }
+    @Test
+    public void testProjection(){
+        String orderNo = "9b692ea3-e5dd-4fb0-8cc4-c9c910fc3e08";
+        OrderProjection order = orderRepository.findByOrderNoAndOrderType(orderNo,"INVEST");
+        log.info("查询:{}-{}",orderNo, JSONUtil.toJson(order));
+        Assert.assertTrue(orderNo.equals(order.getOrderId()));
     }
 }
