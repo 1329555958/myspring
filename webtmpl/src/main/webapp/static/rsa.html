@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rsa</title>
+</head>
+<body>
+<script type="text/javascript" src="js/rsa.js"></script>
+<script type="text/javascript">
+    //http://blog.sina.com.cn/s/blog_47d78bed0100wmqh.html 参考博客
+    // 依赖包地址3个 http://www.ohdave.com/rsa/   rsa.js是三合一后压缩文件
+    var rsa_m = "b582bfab21f62568d50d2e216c2bf2a76f9e2742b0914d130e76e8d3c24a6a28ba38a4d623d92b66af25844de17138216d0adffb8b14d4ad4d911868e420e9580b7d78e21d1d24a0ed3d7c3dfa61725b55705afb5fa2249478a4c46f3d6d48782111c744bd5abaaa5490ba488b00465a6e2c1f104df44d0ea0f7bf57e985e19d";
+    var rsa_e = "10001";
+    setMaxDigits(131); //131 => n的十六进制位数/2+3
+    var key      = new RSAKeyPair(rsa_e, '', rsa_m); //e,m是从Java代码中获取的
+    /*
+     System.out.println(publicKey.getPublicExponent().toString(16));
+     System.out.println(publicKey.getModulus().toString(16));
+     */
+    var password = "123456";
+    password = encryptedString(key, password); //不支持汉字
+    // 将password传递到后台，在后台使用Java解密
+    /*
+    RSAUtil.decryptJSRsa(password);
+     */
+
+</script>
+</body>
+</html>
