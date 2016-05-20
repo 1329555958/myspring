@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public interface OrderRepository extends PagingAndSortingRepository<OrderEntity,
 
 
     @Modifying
-    @Query("update OrderEntiry o set o.productName = ?1 where u.id = ?2")
+    @Transactional
+    @Query("update OrderEntity o set o.productName = ?1 where o.id = ?2")
     int setProductNameById(String productName, String id);
 }

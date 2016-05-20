@@ -1,6 +1,5 @@
 package com.netfinworks.order.core.repository;
 
-import com.mysema.query.jpa.JPQLTemplates;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.Predicate;
 import com.netfinworks.order.core.entity.OrderEntity;
@@ -22,8 +21,6 @@ public class OrderRepositoryImpl implements OrderRepositoryExt {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    private JPQLTemplates jpqlTemplates;
 
     @Override
     public OrderEntity findByOrderNo(String orderNo) {
@@ -33,10 +30,10 @@ public class OrderRepositoryImpl implements OrderRepositoryExt {
     }
 
 
-    public List<OrderEntity> findById(String  id){
+    public List<OrderEntity> findUseQueryDsl(String  type){
+        JPAQuery query = new JPAQuery(entityManager);
         QOrderEntity qOrder = QOrderEntity.orderEntity;
-        JPAQuery query = new JPAQuery(entityManager,jpqlTemplates);
-        return query.from(qOrder).where(qOrder.id.eq(id)).list(qOrder);
+        return query.from(qOrder).where(qOrder.orderType.eq(type)).offset(1).limit(2).list(qOrder);
     }
 
 }

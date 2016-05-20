@@ -63,7 +63,12 @@ public class OrderController {
         log.info("type:{}",JSONUtil.toJson( repository.findByOrderType(type)));
         log.info("type2:{}",JSONUtil.toJson( repository.findByOrderType2(type)));
         log.info("type3:{}",JSONUtil.toJson( repository.findByOrderType3(type)));
-//        log.info("orderNo and type:{}",JSONUtil.toJson(repository.findByOrderNoAndOrderType("9b692ea3-e5dd-4fb0-8cc4-c9c910fc3e08",type)));
+        log.info("querydsl:{}",JSONUtil.toJson(repository.findUseQueryDsl(type)));
         return repository.findByOrderType(type);
+    }
+
+    @RequestMapping("/update")
+    public Object update(@RequestParam String productName){
+        return repository.setProductNameById(productName,"a2d53afc-2fd6-4b54-a6e3-3c8877ea24f3");
     }
 }
