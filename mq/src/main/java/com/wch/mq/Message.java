@@ -5,7 +5,7 @@ package com.wch.mq;
  */
 public class Message {
 
-    private String id,name;
+    private String id, name;
 
     public String getId() {
         return id;

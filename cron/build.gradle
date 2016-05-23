@@ -1,3 +1,10 @@
 apply plugin: 'war'
 
 group = 'cron'
+
+
+dependencies {
+    compile "org.springframework:spring-context-support:${springVersion}"
+    compile "org.quartz-scheduler:quartz:2.2.1"
+//    compile "com.netfinworks.matrix:matrix-quartz:0.1.10-SNAPSHOT"
+}

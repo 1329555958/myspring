@@ -50,6 +50,7 @@ subprojects {
     repositories {
         maven { url "http://nexus.vfinance.cn:9081/content/groups/public/" }
         maven { url "http://repo.spring.io/release" }
+        mavenCentral()
     }
 
     dependencies {
