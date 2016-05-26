@@ -1,0 +1,49 @@
+//https://github.com/jOOQ/jOOQ
+
+import javax.xml.bind.JAXB
+import org.jooq.util.GenerationTool
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jooq:jooq-codegen:3.8.0'
+        classpath 'mysql:mysql-connector-java:5.1.29'
+    }
+}
+apply plugin: 'war'
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.29'
+    compile "org.springframework.boot:spring-boot-starter-jooq:1.3.5.RELEASE"
+}
+
+// Use your favourite XML builder to construct the code generation configuration file
+// ----------------------------------------------------------------------------------
+def writer = new StringWriter()
+def xml = new groovy.xml.MarkupBuilder(writer)
+        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.6.0.xsd') {
+    jdbc() {
+        driver('com.mysql.jdbc.Driver')
+        url('jdbc:mysql://10.65.216.64:3321/optimus?useUnicode=true&amp;zeroDateTimeBehavior=round&amp;characterEncoding=UTF-8')
+        user('optimususer')
+        password('optimususer')
+    }
+    generator() {
+        database() {
+            inputSchema('optimus')
+        }
+        generate() {
+        }
+        target() {
+            packageName('com.wch.jooq.entity')
+            directory('src/main/java')
+        }
+    }
+}
+
+GenerationTool.main(
+        JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+)

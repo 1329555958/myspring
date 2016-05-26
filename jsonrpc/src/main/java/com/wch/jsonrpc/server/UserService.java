@@ -6,7 +6,7 @@ import com.wch.jsonrpc.domain.User;
 /**
  * Created by weichunhe on 2016/5/23.
  */
-@JsonRpcService("/rpc/user")
+@JsonRpcService("rpc/user")
 public interface UserService {
     /**
      * 查找用户
