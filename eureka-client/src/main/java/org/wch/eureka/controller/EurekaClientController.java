@@ -29,6 +29,10 @@ public class EurekaClientController {
         return remoteHelloService.remoteHello();
     }
 
+    public String timeout() {
+        return "timeout";
+    }
+
     @Autowired
     RestTemplate restTemplate;
 
