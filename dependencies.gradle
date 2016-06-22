@@ -33,7 +33,8 @@ ext {
             jackson   : [
                     "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
                     "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
-                    "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+                    "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+                    "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
             ],
             test      : [
                     "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",

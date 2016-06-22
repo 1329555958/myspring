@@ -1,0 +1,19 @@
+## 端口
+server:
+  port: 10001
+
+
+## 该应用名字
+spring:
+  application:
+    name: test-server
+
+## eureka server相关配置
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

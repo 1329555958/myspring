@@ -1,3 +1,6 @@
-include 'webtmpl', 'cron', 'jpa', 'jsonrpc', 'mail', 'mq','jooq'
+include 'webtmpl', 'cron', 'jpa', 'jsonrpc', 'mail', 'mq'
 include 'test'
+include 'eureka'
+include 'eureka-service'
+include 'eureka-client'
 

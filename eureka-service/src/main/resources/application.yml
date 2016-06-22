@@ -1,0 +1,11 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
+
+spring:
+  application:
+    name: test-service
+
+server:
+  port: 10002

@@ -1,0 +1,21 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
+
+spring:
+  application:
+    name: test-client
+
+server:
+  port: 10003
+
+## ribbon直接映射注册到eureka的服务
+ribbon:
+  eureka:
+    enabled: true
+
+zuul:
+  ignoredServices: *
+  routes:
+    test-service: /test/**
