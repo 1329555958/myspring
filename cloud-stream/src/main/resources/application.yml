@@ -17,9 +17,22 @@ spring:
 #                username: guest
 #                password: guest
 #                virtual-host: /hostName
+  application:
+      # This ends up as the service name in zipkin
+      name: stream-sleuth
+  zipkin:
+    # Uncomment to send to zipkin, replacing 192.168.99.100 with your zipkin IP address
+     baseUrl: http://10.5.16.14:9411/
+  sleuth:
+    sampler:
+      percentage: 1.0
 server:
   port: 8090
 
+sample:
+  zipkin:
+    # When enabled=false, traces log to the console. Comment to send to zipkin
+    enabled: true
 #
 ## app 2
 #server:
@@ -42,4 +55,3 @@ server:
 ##                username: guest
 ##                password: guest
 ##                virtual-host: /hostName
-
