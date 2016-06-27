@@ -16,6 +16,8 @@ public class Controller {
     @RequestMapping("/hi")
     public Object hi(String msg) {
         producer.producer(msg);
+        producer.send(msg);
+        System.out.println(msg);
         return "hi-" + msg;
     }
 }
