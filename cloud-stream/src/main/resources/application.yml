@@ -1,0 +1,45 @@
+# app 1
+spring:
+  cloud:
+    stream:
+      bindings:
+        output_channel:       #channelName
+          destination: mydest #destination，或者可以认为是发布－订阅模型里面的topic
+          binder: rabbit1
+      binders:
+        rabbit1:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 10.5.16.14   #rabbitMQ服务器地址
+                port: 5672          #rabbitMQ服务器端口
+#                username: guest
+#                password: guest
+#                virtual-host: /hostName
+server:
+  port: 8090
+
+#
+## app 2
+#server:
+#  port: 8099
+#spring:
+#  cloud:
+#    stream:
+#      bindings:
+#        input_channel:
+#          destination: mydest #position2。destination，或者可以认为是发布－订阅模型里面的topic，这里应该与输出app中发布的topic一致，表示订阅该主题
+#          binder: rabbit1
+#      binders:
+#        rabbit1:
+#          type: rabbit
+#          environment:
+#            spring:
+#              rabbitmq:
+#                host: 10.5.16.14   #rabbitMQ服务器地址
+#                port: 5672          #rabbitMQ服务器端口
+##                username: guest
+##                password: guest
+##                virtual-host: /hostName
+

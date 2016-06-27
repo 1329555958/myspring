@@ -3,4 +3,5 @@ include 'test'
 include 'eureka'
 include 'eureka-service'
 include 'eureka-client'
+include 'cloud-stream'
 

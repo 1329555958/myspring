@@ -16,6 +16,6 @@ ribbon:
     enabled: true
 
 zuul:
-  ignoredServices: *
+  ignoredServices: '*'
   routes:
     test-service: /test/**
