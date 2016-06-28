@@ -7,7 +7,8 @@
 # stream
 服务之间聚合只能使用source、sink、process；
 http://cloud.spring.io/spring-cloud-static/spring-cloud.html#_connecting_multiple_application_instances
-
+不同应用之间传递消息需要，source的output与sink的input相同；
+同一个应用要使用聚合应用https://github.com/1329555958/spring-cloud-samples/tree/master/double
 
 # 常见问题
 * 绑定端口时映射失败

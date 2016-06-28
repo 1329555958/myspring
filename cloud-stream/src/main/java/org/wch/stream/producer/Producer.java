@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,11 @@ public class Producer {
         log.info("send:{},{}", msg, source.output().send(MessageBuilder.withPayload(msg).build()));
 //        channel.send(MessageBuilder.withPayload(msg).build());
         return msg;
+    }
+
+    @StreamListener(Source.OUTPUT)
+    public void listener(String msg) {
+        log.info("listener-receive:{}", msg);
     }
 
 }
