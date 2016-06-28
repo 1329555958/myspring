@@ -4,6 +4,11 @@
 # zipkin
 `docker run -d -p 9411:9411 -p 9410:9410 openzipkin/zipkin`
 
+# stream
+服务之间聚合只能使用source、sink、process；
+http://cloud.spring.io/spring-cloud-static/spring-cloud.html#_connecting_multiple_application_instances
+
+
 # 常见问题
 * 绑定端口时映射失败
 docker0: iptables: No chain/target/match by that name.

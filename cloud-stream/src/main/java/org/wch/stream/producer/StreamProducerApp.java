@@ -1,15 +1,17 @@
-package org.wch.stream;
+package org.wch.stream.producer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.sleuth.zipkin.ZipkinSpanReporter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-public class StreamApplication {
+@PropertySource("classpath:application-producer.properties")
+public class StreamProducerApp {
     public static void main(String[] args) {
-        SpringApplication.run(StreamApplication.class, args);
+        SpringApplication.run(StreamProducerApp.class, args);
     }
 
     // Use this for debugging (or if there is no Zipkin server running on port 9411)
