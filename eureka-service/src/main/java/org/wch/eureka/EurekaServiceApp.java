@@ -3,13 +3,13 @@ package org.wch.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableEurekaServer
-public class TestEurekaServerApplication {
+@EnableEurekaClient
+public class EurekaServiceApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestEurekaServerApplication.class, args);
+        SpringApplication.run(EurekaServiceApp.class, args);
     }
 }

@@ -1,5 +1,5 @@
 ext {
-    jacksonVersion = '2.5.2'
+    jacksonVersion = '2.7.5'
     groovy = "2.4.3"
     springVersion = "4.2.5.RELEASE"
     springBootVersion = '1.3.5.RELEASE'
