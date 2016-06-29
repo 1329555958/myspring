@@ -17,7 +17,6 @@ public class RemoteHelloController {
 
     @RequestMapping("hello")
     public String hello() {
-        System.out.println("hello");
         long start = System.currentTimeMillis();
         ServiceInstance instance = client.getLocalServiceInstance();
         // 随机睡眠1000毫秒以内
@@ -27,7 +26,10 @@ public class RemoteHelloController {
             e.printStackTrace();
         }
         long cost = System.currentTimeMillis() - start;
-        return "Remote Hello~ " + instance.getHost() + ", " + instance.getServiceId()
-                + ", spent " + cost;
+        String msg =
+                "Remote Hello~ " + instance.getHost() + ", " + instance.getServiceId()
+                        + ", spent " + cost;
+        System.out.println(msg);
+        return msg;
     }
 }

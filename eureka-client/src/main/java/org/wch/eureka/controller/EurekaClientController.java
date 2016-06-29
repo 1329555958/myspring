@@ -20,16 +20,29 @@ public class EurekaClientController {
         return "hello eureka";
     }
 
-    @HystrixCommand(fallbackMethod = "timeout", commandProperties = {
+    @HystrixCommand(fallbackMethod = "circuited", commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500")
+//            , @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "30000")
+//            , @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2")
     })
-    @RequestMapping("remoteHello")
+    @RequestMapping("timeoutHello")
     public Object remoteHello() {
-        System.out.println("hello");
+        System.out.println("timeout");
         return remoteHelloService.remoteHello();
     }
 
-    public String timeout() {
+    @HystrixCommand(fallbackMethod = "circuited", commandProperties = {
+//            ,@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2")
+    })
+    @RequestMapping("errorHello")
+    public Object hello2() {
+        System.out.println("error");
+        return remoteHelloService.remoteHello();
+    }
+
+    public String circuited() {
+        System.out.println("circuited");
         return "timeout";
     }
 
