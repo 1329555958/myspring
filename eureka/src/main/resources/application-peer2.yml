@@ -12,6 +12,7 @@ spring:
 eureka:
   instance:
     hostname: peer2
+    leaseRenewalIntervalInSeconds: 3
     preferIpAddress: true
   client:
     registerWithEureka: false
