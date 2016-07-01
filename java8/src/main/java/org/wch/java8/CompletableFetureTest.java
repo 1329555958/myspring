@@ -15,7 +15,7 @@ public class CompletableFetureTest {
 
     static ExecutorService executor = Executors.newFixedThreadPool(4);
 
-    private static CompletableFuture<Integer> getValue1() {
+    public static CompletableFuture<Integer> getValue1() {
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("a1");
@@ -30,7 +30,7 @@ public class CompletableFetureTest {
         return future;
     }
 
-    private static CompletableFuture<Integer> getValue2() {
+    public static CompletableFuture<Integer> getValue2() {
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("a2");
@@ -45,7 +45,7 @@ public class CompletableFetureTest {
         return future;
     }
 
-    private static CompletableFuture<Integer> getValue3() {
+    public static CompletableFuture<Integer> getValue3() {
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("a3");
@@ -60,7 +60,7 @@ public class CompletableFetureTest {
         return future;
     }
 
-    private static CompletableFuture<Integer> getValue4() {
+    public static CompletableFuture<Integer> getValue4() {
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("a4");
