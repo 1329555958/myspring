@@ -6,4 +6,5 @@ include 'eureka-client'
 include 'cloud-stream'
 include 'zuul'
 include 'java8'
+include 'thrift'
 

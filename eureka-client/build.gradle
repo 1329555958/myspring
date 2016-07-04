@@ -14,5 +14,6 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-feign'
     compile 'org.springframework.cloud:spring-cloud-starter-hystrix-dashboard'
     compile 'org.springframework.cloud:spring-cloud-starter-atlas'
+    compile 'com.github.briandilley.jsonrpc4j:jsonrpc4j:1.4.4'
 //    compile 'org.springframework.cloud:spring-cloud-starter-eureka-server'
 }

@@ -1,0 +1,64 @@
+group 'org.wch'
+version '2.0.0'
+
+import org.gradle.internal.os.OperatingSystem
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "ru.trylogic.gradle.plugins:gradle-thrift-plugin:0.1.1"
+    }
+}
+
+repositories {
+    ivy {
+        artifactPattern "http://dl.bintray.com/bsideup/thirdparty/[artifact]-[revision](-[classifier]).[ext]"
+        artifactPattern "http://dl.bintray.com/aatarasoff/maven/[artifact]-[revision](-[classifier]).[ext]"
+    }
+}
+
+apply plugin: 'thrift'
+
+task generateThriftJava(type : ru.trylogic.gradle.thrift.tasks.ThriftCompileTask) {
+    generator = 'java:beans'
+    destinationDir = file("src/main/java/org/wch/protocol")
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir generateThriftJava.destinationDir
+        }
+    }
+}
+
+clean {
+    delete generateThriftJava.destinationDir
+}
+
+idea {
+    module {
+        sourceDirs += file('src/main/thrift')
+        sourceDirs += generateThriftJava.destinationDir
+    }
+}
+
+compileJava.dependsOn generateThriftJava
+
+dependencies {
+    def thriftVersion = '0.9.1';
+    Map platformMapping = [
+            (OperatingSystem.WINDOWS) : 'win',
+            (OperatingSystem.MAC_OS) : 'osx'
+    ].withDefault { 'nix' }
+
+    thrift "org.apache.thrift:thrift:$thriftVersion:${platformMapping.get(OperatingSystem.current())}@bin"
+
+    compile "org.apache.thrift:libthrift:$thriftVersion"
+}

@@ -50,9 +50,7 @@ public class Then {
         try {
             System.out.println("eithor:" + value2.applyToEither(value1, v -> v).get());
             System.out.println("eithor:" + value1.applyToEither(value2, v -> v).get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
     }
