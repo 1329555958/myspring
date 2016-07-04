@@ -11,6 +11,12 @@ spring:
     task:
       closecontext:
         enabled: false
+  zipkin:
+    base-url: http://10.5.16.14:9411/
+    enabled: true
+  sleuth:
+    sampler:
+      percentage: 1.0
 
 ## eureka server相关配置
 eureka:

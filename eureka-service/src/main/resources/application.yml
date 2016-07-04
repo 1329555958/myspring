@@ -6,6 +6,12 @@ eureka:
 spring:
   application:
     name: test-service
+  zipkin:
+    base-url: http://10.5.16.14:9411/
+    enabled: true
+  sleuth:
+    sampler:
+      percentage: 1.0
 
 server:
   port: 10004

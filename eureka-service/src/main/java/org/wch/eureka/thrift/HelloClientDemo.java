@@ -1,8 +1,7 @@
-import demo.HelloWorldService;
+package org.wch.eureka.thrift;
+
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TCompactProtocol;
-import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
@@ -16,7 +15,7 @@ import org.apache.thrift.transport.TTransportException;
 public class HelloClientDemo {
 
     public static final String SERVER_IP = "localhost";
-    public static final int SERVER_PORT = 10004;
+    public static final int SERVER_PORT = 8090;
     public static final int TIMEOUT = 30000;
 
     /**
@@ -51,10 +50,8 @@ public class HelloClientDemo {
      */
     public static void main(String[] args) {
         HelloClientDemo client = new HelloClientDemo();
-        System.out.println("start");
         client.startClient("Michael");
         client.startClient("vf");
-        System.out.println("end");
     }
 
 }

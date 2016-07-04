@@ -4,8 +4,15 @@ dependencyManagement {
     }
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+    compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    compile 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    compile 'info.developerblog.spring.thrift:spring-thrift-starter:1.0.0.RC5'
 //    compile 'org.springframework.cloud:spring-cloud-starter-eureka-server'
 }
