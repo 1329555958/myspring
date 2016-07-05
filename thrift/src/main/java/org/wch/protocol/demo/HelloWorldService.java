@@ -36,7 +36,7 @@ public class HelloWorldService {
 
   public interface Iface {
 
-    public String sayHello(String username) throws org.apache.thrift.TException;
+    public String sayHello(String username) throws SerializedException, org.apache.thrift.TException;
 
   }
 
@@ -66,7 +66,7 @@ public class HelloWorldService {
       super(iprot, oprot);
     }
 
-    public String sayHello(String username) throws org.apache.thrift.TException
+    public String sayHello(String username) throws  org.apache.thrift.TException
     {
       send_sayHello(username);
       return recv_sayHello();
@@ -79,12 +79,15 @@ public class HelloWorldService {
       sendBase("sayHello", args);
     }
 
-    public String recv_sayHello() throws org.apache.thrift.TException
+    public String recv_sayHello() throws SerializedException, org.apache.thrift.TException
     {
       sayHello_result result = new sayHello_result();
       receiveBase(result, "sayHello");
       if (result.isSetSuccess()) {
         return result.success;
+      }
+      if (result.servializedException != null) {
+        throw result.servializedException;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "sayHello failed: unknown result");
     }
@@ -129,7 +132,7 @@ public class HelloWorldService {
         prot.writeMessageEnd();
       }
 
-      public String getResult() throws org.apache.thrift.TException {
+      public String getResult() throws SerializedException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -171,7 +174,11 @@ public class HelloWorldService {
 
       public sayHello_result getResult(I iface, sayHello_args args) throws org.apache.thrift.TException {
         sayHello_result result = new sayHello_result();
-        result.success = iface.sayHello(args.username);
+        try {
+          result.success = iface.sayHello(args.username);
+        } catch (SerializedException servializedException) {
+          result.servializedException = servializedException;
+        }
         return result;
       }
     }
@@ -220,6 +227,12 @@ public class HelloWorldService {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
             sayHello_result result = new sayHello_result();
+            if (e instanceof SerializedException) {
+                        result.servializedException = (SerializedException) e;
+                        result.setServializedExceptionIsSet(true);
+                        msg = result;
+            }
+             else 
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -601,6 +614,7 @@ public class HelloWorldService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sayHello_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRING, (short)0);
+    private static final org.apache.thrift.protocol.TField SERVIALIZED_EXCEPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("servializedException", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -609,10 +623,12 @@ public class HelloWorldService {
     }
 
     private String success; // required
+    private SerializedException servializedException; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SUCCESS((short)0, "success");
+      SUCCESS((short)0, "success"),
+      SERVIALIZED_EXCEPTION((short)1, "servializedException");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -629,6 +645,8 @@ public class HelloWorldService {
         switch(fieldId) {
           case 0: // SUCCESS
             return SUCCESS;
+          case 1: // SERVIALIZED_EXCEPTION
+            return SERVIALIZED_EXCEPTION;
           default:
             return null;
         }
@@ -674,6 +692,8 @@ public class HelloWorldService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.SERVIALIZED_EXCEPTION, new org.apache.thrift.meta_data.FieldMetaData("servializedException", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sayHello_result.class, metaDataMap);
     }
@@ -682,10 +702,12 @@ public class HelloWorldService {
     }
 
     public sayHello_result(
-      String success)
+      String success,
+      SerializedException servializedException)
     {
       this();
       this.success = success;
+      this.servializedException = servializedException;
     }
 
     /**
@@ -694,6 +716,9 @@ public class HelloWorldService {
     public sayHello_result(sayHello_result other) {
       if (other.isSetSuccess()) {
         this.success = other.success;
+      }
+      if (other.isSetServializedException()) {
+        this.servializedException = new SerializedException(other.servializedException);
       }
     }
 
@@ -704,6 +729,7 @@ public class HelloWorldService {
     @Override
     public void clear() {
       this.success = null;
+      this.servializedException = null;
     }
 
     public String getSuccess() {
@@ -729,6 +755,29 @@ public class HelloWorldService {
       }
     }
 
+    public SerializedException getServializedException() {
+      return this.servializedException;
+    }
+
+    public void setServializedException(SerializedException servializedException) {
+      this.servializedException = servializedException;
+    }
+
+    public void unsetServializedException() {
+      this.servializedException = null;
+    }
+
+    /** Returns true if field servializedException is set (has been assigned a value) and false otherwise */
+    public boolean isSetServializedException() {
+      return this.servializedException != null;
+    }
+
+    public void setServializedExceptionIsSet(boolean value) {
+      if (!value) {
+        this.servializedException = null;
+      }
+    }
+
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case SUCCESS:
@@ -739,6 +788,14 @@ public class HelloWorldService {
         }
         break;
 
+      case SERVIALIZED_EXCEPTION:
+        if (value == null) {
+          unsetServializedException();
+        } else {
+          setServializedException((SerializedException)value);
+        }
+        break;
+
       }
     }
 
@@ -746,6 +803,9 @@ public class HelloWorldService {
       switch (field) {
       case SUCCESS:
         return getSuccess();
+
+      case SERVIALIZED_EXCEPTION:
+        return getServializedException();
 
       }
       throw new IllegalStateException();
@@ -760,6 +820,8 @@ public class HelloWorldService {
       switch (field) {
       case SUCCESS:
         return isSetSuccess();
+      case SERVIALIZED_EXCEPTION:
+        return isSetServializedException();
       }
       throw new IllegalStateException();
     }
@@ -783,6 +845,15 @@ public class HelloWorldService {
         if (!(this_present_success && that_present_success))
           return false;
         if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_servializedException = true && this.isSetServializedException();
+      boolean that_present_servializedException = true && that.isSetServializedException();
+      if (this_present_servializedException || that_present_servializedException) {
+        if (!(this_present_servializedException && that_present_servializedException))
+          return false;
+        if (!this.servializedException.equals(that.servializedException))
           return false;
       }
 
@@ -812,6 +883,16 @@ public class HelloWorldService {
           return lastComparison;
         }
       }
+      lastComparison = Boolean.valueOf(isSetServializedException()).compareTo(other.isSetServializedException());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetServializedException()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.servializedException, other.servializedException);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -837,6 +918,14 @@ public class HelloWorldService {
         sb.append("null");
       } else {
         sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("servializedException:");
+      if (this.servializedException == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.servializedException);
       }
       first = false;
       sb.append(")");
@@ -890,6 +979,15 @@ public class HelloWorldService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 1: // SERVIALIZED_EXCEPTION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.servializedException = new SerializedException();
+                struct.servializedException.read(iprot);
+                struct.setServializedExceptionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -906,6 +1004,11 @@ public class HelloWorldService {
         if (struct.success != null) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           oprot.writeString(struct.success);
+          oprot.writeFieldEnd();
+        }
+        if (struct.servializedException != null) {
+          oprot.writeFieldBegin(SERVIALIZED_EXCEPTION_FIELD_DESC);
+          struct.servializedException.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -929,19 +1032,30 @@ public class HelloWorldService {
         if (struct.isSetSuccess()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetServializedException()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
         if (struct.isSetSuccess()) {
           oprot.writeString(struct.success);
+        }
+        if (struct.isSetServializedException()) {
+          struct.servializedException.write(oprot);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, sayHello_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           struct.success = iprot.readString();
           struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.servializedException = new SerializedException();
+          struct.servializedException.read(iprot);
+          struct.setServializedExceptionIsSet(true);
         }
       }
     }

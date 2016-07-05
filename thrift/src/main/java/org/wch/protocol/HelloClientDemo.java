@@ -1,4 +1,5 @@
 import demo.HelloWorldService;
+import demo.SerializedException;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TCompactProtocol;
@@ -16,7 +17,7 @@ import org.apache.thrift.transport.TTransportException;
 public class HelloClientDemo {
 
     public static final String SERVER_IP = "localhost";
-    public static final int SERVER_PORT = 10004;
+    public static final int SERVER_PORT = 8090;
     public static final int TIMEOUT = 30000;
 
     /**
@@ -27,17 +28,23 @@ public class HelloClientDemo {
         try {
             transport = new TSocket(SERVER_IP, SERVER_PORT, TIMEOUT);
             // 协议要和服务端一致
-            TProtocol protocol = new TBinaryProtocol(transport);
+//            TProtocol protocol = new TBinaryProtocol(transport);
             // TProtocol protocol = new TCompactProtocol(transport);
-            // TProtocol protocol = new TJSONProtocol(transport);
+            TProtocol protocol = new TJSONProtocol(transport);
             HelloWorldService.Client client = new HelloWorldService.Client(
                     protocol);
+
             transport.open();
             String result = client.sayHello(userName);
             System.out.println("Thrify client result =: " + result);
         } catch (TTransportException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (SerializedException e) {
+            System.out.println("服务端异常:" + e.getPayload());
             e.printStackTrace();
         } catch (TException e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         } finally {
             if (null != transport) {
@@ -51,10 +58,8 @@ public class HelloClientDemo {
      */
     public static void main(String[] args) {
         HelloClientDemo client = new HelloClientDemo();
-        System.out.println("start");
         client.startClient("Michael");
         client.startClient("vf");
-        System.out.println("end");
     }
 
 }

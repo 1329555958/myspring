@@ -31,9 +31,9 @@ public class HelloServerDemo {
             TServerSocket serverTransport = new TServerSocket(SERVER_PORT);
             TServer.Args tArgs = new TServer.Args(serverTransport);
             tArgs.processor(tprocessor);
-            tArgs.protocolFactory(new TBinaryProtocol.Factory());
+//            tArgs.protocolFactory(new TBinaryProtocol.Factory());
             // tArgs.protocolFactory(new TCompactProtocol.Factory());
-            // tArgs.protocolFactory(new TJSONProtocol.Factory());
+             tArgs.protocolFactory(new TJSONProtocol.Factory());
             TServer server = new TSimpleServer(tArgs);
             server.serve();
 
