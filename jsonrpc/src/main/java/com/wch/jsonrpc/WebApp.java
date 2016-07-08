@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Created by weichunhe on 2016/3/17.
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @SpringBootApplication
+@PropertySource("classpath:application-server.properties")
 public class WebApp {
     public static void main(String[] args) {
         SpringApplication.run(WebApp.class, args);
