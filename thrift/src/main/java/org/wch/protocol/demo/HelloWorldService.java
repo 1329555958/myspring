@@ -66,7 +66,7 @@ public class HelloWorldService {
       super(iprot, oprot);
     }
 
-    public String sayHello(String username) throws  org.apache.thrift.TException
+    public String sayHello(String username) throws SerializedException, org.apache.thrift.TException
     {
       send_sayHello(username);
       return recv_sayHello();
