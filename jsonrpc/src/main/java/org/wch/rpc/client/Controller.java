@@ -21,10 +21,15 @@ public class Controller {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private com.wch.jsonrpc.rpcservice.UserService userService2;
+
 
     @RequestMapping("/user")
     public Object findUserByIdAndName(String id, String name) {
         User user = userService.findUserByIdAndName(id, name);
+        System.out.println(user);
+        user = userService2.findUserByName(name);
         System.out.println(user);
         return user;
     }

@@ -41,8 +41,11 @@ public class ClientApp {
     }
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
+    public static AutoJsonRpcClientProxyCreator clientProxyCreator2() {
+        AutoJsonRpcClientProxyCreator creator = new AutoJsonRpcClientProxyCreator();
+        creator.setScanPackage(com.wch.jsonrpc.rpcservice.UserService.class.getPackage().getName());
+        creator.setServiceId("rpc-service");
+        return creator;
     }
 
 }
