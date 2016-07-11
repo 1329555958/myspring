@@ -5,6 +5,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import info.developerblog.spring.thrift.annotation.ThriftClient;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -20,8 +22,14 @@ public class EurekaClientController {
     @Autowired
     RemoteHelloService remoteHelloService;
 
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
+
     @RequestMapping("hello")
     public String hello() {
+
+        ServiceInstance instance = loadBalancerClient.choose("test-service");
+        System.out.println(instance.getUri() + ":" + instance.getPort() + ":" + instance.getServiceId());
         return "hello eureka";
     }
 
@@ -67,4 +75,6 @@ public class EurekaClientController {
     public String ribbonHello() {
         return restTemplate.getForEntity("http://test-service/hello", String.class).getBody();
     }
+
+
 }

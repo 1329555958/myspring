@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import java.net.URL;
 
 @SpringBootApplication
 @PropertySource("application-client.properties")
+@EnableEurekaClient
 public class ClientApp {
 
     public static void main(String[] args) {
@@ -30,16 +33,10 @@ public class ClientApp {
     }
 
     @Bean
-    public static AutoJsonRpcClientProxyCreator clientProxyCreator(@Value("${rpc.baseUrl}") String baseUrl) {
-        System.out.println("baseUrl=" + baseUrl);
+    public static AutoJsonRpcClientProxyCreator clientProxyCreator() {
         AutoJsonRpcClientProxyCreator creator = new AutoJsonRpcClientProxyCreator();
-        try {
-            creator.setBaseUrl(new URL("http://localhost:10010"));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
         creator.setScanPackage(UserService.class.getPackage().getName());
-        System.out.println("init client");
+        creator.setServiceId("rpc-service");
         return creator;
     }
 

@@ -3,6 +3,7 @@ package org.wch.rpc.client;
 import com.wch.jsonrpc.domain.User;
 import com.wch.jsonrpc.server.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class Controller {
     @Autowired
     private UserService userService;
+
 
     @RequestMapping("/user")
     public Object findUserByIdAndName(String id, String name) {
