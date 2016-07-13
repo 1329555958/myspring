@@ -1,26 +1,18 @@
 package org.wch.rpc.client;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcClientProxyCreator;
-import com.netfinworks.util.jsonrpc.MatrixJsonProxyFactoryBean;
-import com.wch.jsonrpc.domain.User;
-import com.wch.jsonrpc.server.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
+import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceExporter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
+import org.wch.rpc.client.rpcservice.UserServiceImpl2;
+import com.wch.jsonrpc.server.UserService;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.sleuth.zipkin.ZipkinSpanReporter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 @SpringBootApplication
@@ -33,6 +25,13 @@ public class ClientApp {
     }
 
     @Bean
+    public AutoJsonRpcServiceExporter autoJsonRpcServiceExporter() {
+        AutoJsonRpcServiceExporter.addImplScanPackage(UserServiceImpl2.class.getName());
+        return new AutoJsonRpcServiceExporter();
+    }
+
+
+    @Bean
     public static AutoJsonRpcClientProxyCreator clientProxyCreator() {
         AutoJsonRpcClientProxyCreator creator = new AutoJsonRpcClientProxyCreator();
         creator.setScanPackage(UserService.class.getPackage().getName());
@@ -40,12 +39,17 @@ public class ClientApp {
         return creator;
     }
 
-    @Bean
-    public static AutoJsonRpcClientProxyCreator clientProxyCreator2() {
-        AutoJsonRpcClientProxyCreator creator = new AutoJsonRpcClientProxyCreator();
-        creator.setScanPackage(com.wch.jsonrpc.rpcservice.UserService.class.getPackage().getName());
-        creator.setServiceId("rpc-service");
-        return creator;
-    }
 
+    // Use this for debugging (or if there is no Zipkin server running on port 9411)
+    @Bean
+    @ConditionalOnProperty(value = "sample.zipkin.enabled", havingValue = "false")
+    public ZipkinSpanReporter spanCollector() {
+        System.out.println("sample.zipkin.enabled");
+        return new ZipkinSpanReporter() {
+            @Override
+            public void report(zipkin.Span span) {
+                System.out.println((String.format("Reporting span [%s]", span)));
+            }
+        };
+    }
 }

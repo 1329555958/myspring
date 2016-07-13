@@ -2,11 +2,13 @@ package com.wch.jsonrpc;
 
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcClientProxyCreator;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceExporter;
-import com.wch.jsonrpc.server.UserService;
+import com.wch.jsonrpc.rpcimpl.UserServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.sleuth.zipkin.ZipkinSpanReporter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -26,9 +28,18 @@ public class WebApp {
 
     @Bean
     public AutoJsonRpcServiceExporter autoJsonRpcServiceExporter() {
+        AutoJsonRpcServiceExporter.addImplScanPackage(UserServiceImpl.class.getName());
         return new AutoJsonRpcServiceExporter();
     }
 
+
+    @Bean
+    public static AutoJsonRpcClientProxyCreator clientProxyCreator2() {
+        AutoJsonRpcClientProxyCreator creator = new AutoJsonRpcClientProxyCreator();
+        creator.setScanPackage(org.wch.rpc.client.rpcservice.UserService.class.getPackage().getName());
+        creator.setServiceId("rpc-client");
+        return creator;
+    }
 //    @Bean
 //    public AutoJsonRpcServiceImplExporter autoJsonRpcServiceImplExporter() {
 //        return new AutoJsonRpcServiceImplExporter();
@@ -60,6 +71,7 @@ public class WebApp {
 
     /**
      * 使用负载均衡时这么配置
+     *
      * @return
      */
 //    @Bean
@@ -69,4 +81,17 @@ public class WebApp {
 //        creator.setServiceId("rpc-service");
 //        return creator;
 //    }
+
+    // Use this for debugging (or if there is no Zipkin server running on port 9411)
+    @Bean
+    @ConditionalOnProperty(value = "sample.zipkin.enabled", havingValue = "false")
+    public ZipkinSpanReporter spanCollector() {
+        System.out.println("sample.zipkin.enabled");
+        return new ZipkinSpanReporter() {
+            @Override
+            public void report(zipkin.Span span) {
+                System.out.println((String.format("Reporting span [%s]", span)));
+            }
+        };
+    }
 }

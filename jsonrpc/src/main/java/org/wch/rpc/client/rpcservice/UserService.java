@@ -1,4 +1,4 @@
-package com.wch.jsonrpc.rpcservice;
+package org.wch.rpc.client.rpcservice;
 
 import com.googlecode.jsonrpc4j.JsonRpcService;
 import com.wch.jsonrpc.domain.User;

@@ -30,3 +30,8 @@ zuul:
 netflix:
   atlas:
     uri: http://10.5.16.14:7101/api/v1/publish/
+
+logging:
+  level:
+    info:
+     developerblog: debug

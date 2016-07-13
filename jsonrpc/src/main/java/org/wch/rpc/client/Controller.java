@@ -1,5 +1,6 @@
 package org.wch.rpc.client;
 
+import com.netfinworks.util.JSONUtil;
 import com.wch.jsonrpc.domain.User;
 import com.wch.jsonrpc.server.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,15 +25,10 @@ public class Controller {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private com.wch.jsonrpc.rpcservice.UserService userService2;
-
 
     @RequestMapping("/user")
-    public Object findUserByIdAndName(String id, String name) {
+    public Object findUserByIdAndName(String id, String name, HttpServletRequest request) {
         User user = userService.findUserByIdAndName(id, name);
-        System.out.println(user);
-        user = userService2.findUserByName(name);
         System.out.println(user);
         return user;
     }

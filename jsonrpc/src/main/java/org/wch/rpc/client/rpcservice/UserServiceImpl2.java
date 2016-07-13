@@ -1,7 +1,7 @@
-package com.wch.jsonrpc.rpcimpl;
+package org.wch.rpc.client.rpcservice;
 
 import com.wch.jsonrpc.domain.User;
-import com.wch.jsonrpc.rpcservice.UserService;
+import org.wch.rpc.client.rpcservice.UserService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +15,7 @@ public class UserServiceImpl2 implements UserService {
     public User findUserByName(String name) {
         System.out.println("rpc server 2");
         User user = new User();
-        user.setName(name);
+        user.setName(name.toUpperCase());
         user.setId(System.currentTimeMillis() + "");
         user.setAge(30);
         return user;

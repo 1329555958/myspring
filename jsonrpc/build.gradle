@@ -12,8 +12,10 @@ repositories {
     mavenLocal()
 }
 dependencies {
-    compile 'com.github.briandilley.jsonrpc4j:jsonrpc4j:2.0.1'
+    compile 'com.github.wch.jsonrpc4j:jsonrpc4j:2.0.1'
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     compile 'org.springframework.cloud:spring-cloud-starter-ribbon'
+    compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    compile 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
 //    compile 'org.springframework.cloud:spring-cloud-starter-feign'
 }
