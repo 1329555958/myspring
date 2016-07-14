@@ -20,3 +20,5 @@ logging:
   level:
     info:
      developerblog: debug
+info:
+  component: eureka-service
