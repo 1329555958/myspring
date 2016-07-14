@@ -6,8 +6,11 @@ spring:
   cloud:
     config:
       server:
+        overrides:
+          server.override: server
         git:
           uri: https://github.com/1329555958/myspring
+#          查找子目录,支持通配符
           searchPaths: config-repo
 
 server:

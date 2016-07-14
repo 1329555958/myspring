@@ -18,9 +18,10 @@ public class ClientApp {
 
     @Bean
     public Object inject(@Value("${all.shared:noShared}") String shared, @Value("${higher.precedence:pre}") String
-            precedence) {
+            precedence, @Value("${server.override:no}") String override) {
         System.out.println("共享application:" + shared);
         System.out.println("优先级:" + precedence);
+        System.out.println("覆盖:" + override);
         return new Object();
     }
 }
