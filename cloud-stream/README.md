@@ -3,6 +3,8 @@
 
 # zipkin
 `docker run -d -p 9411:9411 -p 9410:9410 openzipkin/zipkin`
+`docker run --name zipkin-cassandra --env STORAGE_TYPE=cassandra --env STORAGE_PORT_9042_TCP_ADDR=10.5.16.14 -d -p 9511:9411 -p 9510:9410 openzipkin/zipkin`
+`docker run --name cassandra -p 7001:7001 -p 7199:7199 -p 9042:9042 -p 7000:7000 -p 9160:9160 -v /var/cassandra/data:/var/lib/cassandra -d cassandra:latest`
 
 # stream
 服务之间聚合只能使用source、sink、process；
