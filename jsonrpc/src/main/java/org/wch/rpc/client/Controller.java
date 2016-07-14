@@ -1,11 +1,13 @@
 package org.wch.rpc.client;
 
-import com.netfinworks.util.JSONUtil;
+import com.amazonaws.util.json.JSONUtils;
 import com.wch.jsonrpc.domain.User;
 import com.wch.jsonrpc.server.UserService;
+import org.kopitubruk.util.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,5 +41,14 @@ public class Controller {
         user.setAge(10);
         user.setId("123");
         return user;
+    }
+
+    public static void main(String[] args) {
+
+        User user = new User();
+        user.setAge(10);
+        user.setName("wch");
+        user.setId("dsdf");
+        System.out.println(org.wch.util.JSONUtil.toJson(user));
     }
 }

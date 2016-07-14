@@ -57,7 +57,8 @@ subprojects {
         compile libs.common
         compile libs.jackson
         compile libs.springBoot
-        compile libs.matrix
+        compile project(':util')
+//        compile libs.matrix
 //        compile group: 'org.mapstruct', name: 'mapstruct-jdk8', version: mapstructVersion
         testCompile libs.test
     }

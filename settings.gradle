@@ -9,4 +9,8 @@ include 'java8'
 include 'thrift'
 include 'annotation'
 include 'rxjava'
+include 'config-server'
+include 'config-client'
+include 'util'
+include 'config-repo'
 
