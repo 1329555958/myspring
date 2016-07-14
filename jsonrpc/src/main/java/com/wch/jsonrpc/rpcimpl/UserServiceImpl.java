@@ -1,12 +1,10 @@
 package com.wch.jsonrpc.rpcimpl;
 
 import com.wch.jsonrpc.domain.User;
-import com.wch.jsonrpc.feign.FeignInf;
 import com.wch.jsonrpc.server.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.wch.util.JSONUtil;
 
 /**
  * Created by weichunhe on 2016/5/23.
@@ -16,9 +14,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     org.wch.rpc.client.rpcservice.UserService service2;
-
-    @Autowired
-    private FeignInf feignInf;
 
     /**
      * 查找用户
@@ -32,8 +27,6 @@ public class UserServiceImpl implements UserService {
         System.out.println("rpc service 1");
         User user = service2.findUserByName(name);
         user.setId(id);
-        user.setName(feignInf.feignHello());
-        System.out.println(user);
         return user;
     }
 

@@ -18,5 +18,5 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
     compile 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
     compile project(':util')
-    compile 'org.springframework.cloud:spring-cloud-starter-feign'
+//    compile 'org.springframework.cloud:spring-cloud-starter-feign'
 }
