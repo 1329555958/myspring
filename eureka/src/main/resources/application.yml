@@ -20,6 +20,8 @@ spring:
 
 ## eureka server相关配置
 eureka:
+  server:
+    enable-self-preservation: false
   instance:
     hostname: peer1
     preferIpAddress: true
