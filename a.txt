@@ -1,0 +1,925 @@
+4.2.5.RELEASE:zipkin-rabbitmq:dependencies
+
+------------------------------------------------------------
+Project :zipkin-rabbitmq
+------------------------------------------------------------
+
+archives - Configuration for archive artifacts.
+No dependencies
+
+compile - Compile classpath for source set 'main'.
++--- commons-codec:commons-codec:1.8
++--- org.projectlombok:lombok:1.16.6
++--- commons-collections:commons-collections:3.2
++--- org.apache.commons:commons-lang3:3.3.2
++--- org.apache.httpcomponents:httpcore:4.4.1
++--- org.apache.httpcomponents:httpclient:4.4.1
+|    +--- org.apache.httpcomponents:httpcore:4.4.1
+|    \--- commons-codec:commons-codec:1.9 -> 1.8
++--- org.slf4j:slf4j-api:1.7.12
++--- com.nurkiewicz.asyncretry:asyncretry:0.0.7
+|    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.12
++--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-databind:2.7.5
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.5
+|    \--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-annotations:2.7.5
++--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.7
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.7
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.20 -> 1.7.12
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.21
+|    |    |         \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.3.5.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.0.33
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.springframework.boot:spring-boot-starter-validation:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.hibernate:hibernate-validator:5.2.4.Final
+|    |         +--- javax.validation:validation-api:1.1.0.Final
+|    |         +--- org.jboss.logging:jboss-logging:3.2.1.Final -> 3.3.0.Final
+|    |         \--- com.fasterxml:classmate:1.1.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    +--- org.springframework:spring-web:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    \--- org.springframework:spring-webmvc:4.2.6.RELEASE
+|         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-core:4.2.6.RELEASE
+|         +--- org.springframework:spring-expression:4.2.6.RELEASE (*)
+|         \--- org.springframework:spring-web:4.2.6.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-sleuth-zipkin-stream: -> 1.0.1.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-aop:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjweaver:1.8.9 -> 1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjrt:1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-stream:1.0.1.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE (*)
+|    |    \--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE
+|    |         +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE
+|    |         |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |         |    \--- org.springframework.boot:spring-boot-actuator:1.3.5.RELEASE
+|    |         |         +--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |         |         +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
+|    |         |         +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |         \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |         +--- org.springframework:spring-messaging:4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE
+|    |         |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |         |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-tuple:1.0.0.RELEASE
+|    |         |    +--- com.esotericsoftware:kryo-shaded:3.0.3
+|    |         |    |    +--- com.esotericsoftware:minlog:1.3.0
+|    |         |    |    \--- org.objenesis:objenesis:2.1
+|    |         |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |    \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.integration:spring-integration-tuple:1.0.0.RELEASE
+|    |         |    +--- org.springframework:spring-tuple:1.0.0.RELEASE (*)
+|    |         |    \--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |         \--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-cloud-connectors:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.2.RELEASE
+|    |    |    +--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    |    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-heroku-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    \--- org.springframework.cloud:spring-cloud-localconfig-connector:1.2.2.RELEASE
+|    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |         \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    +--- io.zipkin.java:zipkin-server:1.1.1
+|    |    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE (*)
+|    |    \--- io.zipkin.java:zipkin:1.1.1
+|    \--- io.zipkin.java:zipkin-autoconfigure-storage-mysql:1.1.1
+|         +--- io.zipkin.java:zipkin-storage-mysql:1.1.1
+|         |    +--- io.zipkin.java:zipkin:1.1.1
+|         |    \--- org.jooq:jooq:3.8.2 -> 3.7.3
+|         +--- org.mariadb.jdbc:mariadb-java-client:1.4.5 -> 1.2.3
+|         |    \--- net.java.dev.jna:jna:3.3.0
+|         +--- com.zaxxer:HikariCP:2.4.6 -> 2.4.5
+|         |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.12
+|         \--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-stream-binder-rabbit: -> 1.0.2.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE (*)
+|    +--- org.springframework.cloud:spring-cloud-stream-codec:1.0.2.RELEASE
+|    |    +--- com.esotericsoftware:kryo-shaded:3.0.3 (*)
+|    |    \--- com.fasterxml.jackson.core:jackson-annotations:2.6.6 -> 2.7.5
+|    +--- org.springframework.boot:spring-boot-starter-amqp:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.6.RELEASE
+|    |         +--- org.springframework:spring-messaging:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework.amqp:spring-amqp:1.5.6.RELEASE
+|    |         |    \--- org.springframework:spring-core:4.2.2.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    |         +--- org.springframework:spring-tx:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:http-client:1.0.0.RELEASE
+|    |         |    +--- org.apache.httpcomponents:httpclient:4.3.6 -> 4.4.1 (*)
+|    |         |    \--- com.fasterxml.jackson.core:jackson-databind:2.5.1 -> 2.7.5 (*)
+|    |         +--- org.springframework:spring-web:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:amqp-client:3.5.7
+|    |         \--- org.springframework:spring-context:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    +--- org.springframework.integration:spring-integration-amqp:4.2.5.RELEASE
+|    |    +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.2.RELEASE -> 1.5.6.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE (*)
++--- mysql:mysql-connector-java:5.1.29
+\--- org.springframework.boot:spring-boot-starter-jdbc: -> 1.3.5.RELEASE
+     +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+     +--- org.apache.tomcat:tomcat-jdbc:8.0.33
+     |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+     \--- org.springframework:spring-jdbc:4.2.6.RELEASE
+          +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+          +--- org.springframework:spring-core:4.2.6.RELEASE
+          \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+
+default - Configuration for default artifacts.
++--- commons-codec:commons-codec:1.8
++--- org.projectlombok:lombok:1.16.6
++--- commons-collections:commons-collections:3.2
++--- org.apache.commons:commons-lang3:3.3.2
++--- org.apache.httpcomponents:httpcore:4.4.1
++--- org.apache.httpcomponents:httpclient:4.4.1
+|    +--- org.apache.httpcomponents:httpcore:4.4.1
+|    \--- commons-codec:commons-codec:1.9 -> 1.8
++--- org.slf4j:slf4j-api:1.7.12
++--- com.nurkiewicz.asyncretry:asyncretry:0.0.7
+|    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.12
++--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-databind:2.7.5
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.5
+|    \--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-annotations:2.7.5
++--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.7
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.7
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.20 -> 1.7.12
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.21
+|    |    |         \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.3.5.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.0.33
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.springframework.boot:spring-boot-starter-validation:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.hibernate:hibernate-validator:5.2.4.Final
+|    |         +--- javax.validation:validation-api:1.1.0.Final
+|    |         +--- org.jboss.logging:jboss-logging:3.2.1.Final -> 3.3.0.Final
+|    |         \--- com.fasterxml:classmate:1.1.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    +--- org.springframework:spring-web:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    \--- org.springframework:spring-webmvc:4.2.6.RELEASE
+|         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-core:4.2.6.RELEASE
+|         +--- org.springframework:spring-expression:4.2.6.RELEASE (*)
+|         \--- org.springframework:spring-web:4.2.6.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-sleuth-zipkin-stream: -> 1.0.1.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-aop:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjweaver:1.8.9 -> 1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjrt:1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-stream:1.0.1.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE (*)
+|    |    \--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE
+|    |         +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE
+|    |         |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |         |    \--- org.springframework.boot:spring-boot-actuator:1.3.5.RELEASE
+|    |         |         +--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |         |         +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
+|    |         |         +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |         \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |         +--- org.springframework:spring-messaging:4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE
+|    |         |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |         |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-tuple:1.0.0.RELEASE
+|    |         |    +--- com.esotericsoftware:kryo-shaded:3.0.3
+|    |         |    |    +--- com.esotericsoftware:minlog:1.3.0
+|    |         |    |    \--- org.objenesis:objenesis:2.1
+|    |         |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |    \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.integration:spring-integration-tuple:1.0.0.RELEASE
+|    |         |    +--- org.springframework:spring-tuple:1.0.0.RELEASE (*)
+|    |         |    \--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |         \--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-cloud-connectors:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.2.RELEASE
+|    |    |    +--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    |    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-heroku-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    \--- org.springframework.cloud:spring-cloud-localconfig-connector:1.2.2.RELEASE
+|    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |         \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    +--- io.zipkin.java:zipkin-server:1.1.1
+|    |    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE (*)
+|    |    \--- io.zipkin.java:zipkin:1.1.1
+|    \--- io.zipkin.java:zipkin-autoconfigure-storage-mysql:1.1.1
+|         +--- io.zipkin.java:zipkin-storage-mysql:1.1.1
+|         |    +--- io.zipkin.java:zipkin:1.1.1
+|         |    \--- org.jooq:jooq:3.8.2 -> 3.7.3
+|         +--- org.mariadb.jdbc:mariadb-java-client:1.4.5 -> 1.2.3
+|         |    \--- net.java.dev.jna:jna:3.3.0
+|         +--- com.zaxxer:HikariCP:2.4.6 -> 2.4.5
+|         |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.12
+|         \--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-stream-binder-rabbit: -> 1.0.2.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE (*)
+|    +--- org.springframework.cloud:spring-cloud-stream-codec:1.0.2.RELEASE
+|    |    +--- com.esotericsoftware:kryo-shaded:3.0.3 (*)
+|    |    \--- com.fasterxml.jackson.core:jackson-annotations:2.6.6 -> 2.7.5
+|    +--- org.springframework.boot:spring-boot-starter-amqp:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.6.RELEASE
+|    |         +--- org.springframework:spring-messaging:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework.amqp:spring-amqp:1.5.6.RELEASE
+|    |         |    \--- org.springframework:spring-core:4.2.2.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    |         +--- org.springframework:spring-tx:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:http-client:1.0.0.RELEASE
+|    |         |    +--- org.apache.httpcomponents:httpclient:4.3.6 -> 4.4.1 (*)
+|    |         |    \--- com.fasterxml.jackson.core:jackson-databind:2.5.1 -> 2.7.5 (*)
+|    |         +--- org.springframework:spring-web:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:amqp-client:3.5.7
+|    |         \--- org.springframework:spring-context:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    +--- org.springframework.integration:spring-integration-amqp:4.2.5.RELEASE
+|    |    +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.2.RELEASE -> 1.5.6.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE (*)
++--- mysql:mysql-connector-java:5.1.29
+\--- org.springframework.boot:spring-boot-starter-jdbc: -> 1.3.5.RELEASE
+     +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+     +--- org.apache.tomcat:tomcat-jdbc:8.0.33
+     |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+     \--- org.springframework:spring-jdbc:4.2.6.RELEASE
+          +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+          +--- org.springframework:spring-core:4.2.6.RELEASE
+          \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+
+providedCompile - Additional compile classpath for libraries that should not be part of the WAR archive.
+No dependencies
+
+providedRuntime - Additional runtime classpath for libraries that should not be part of the WAR archive.
+No dependencies
+
+runtime - Runtime classpath for source set 'main'.
++--- commons-codec:commons-codec:1.8
++--- org.projectlombok:lombok:1.16.6
++--- commons-collections:commons-collections:3.2
++--- org.apache.commons:commons-lang3:3.3.2
++--- org.apache.httpcomponents:httpcore:4.4.1
++--- org.apache.httpcomponents:httpclient:4.4.1
+|    +--- org.apache.httpcomponents:httpcore:4.4.1
+|    \--- commons-codec:commons-codec:1.9 -> 1.8
++--- org.slf4j:slf4j-api:1.7.12
++--- com.nurkiewicz.asyncretry:asyncretry:0.0.7
+|    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.12
++--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-databind:2.7.5
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.5
+|    \--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-annotations:2.7.5
++--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.7
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.7
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.20 -> 1.7.12
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.21
+|    |    |         \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.3.5.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.0.33
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.springframework.boot:spring-boot-starter-validation:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.hibernate:hibernate-validator:5.2.4.Final
+|    |         +--- javax.validation:validation-api:1.1.0.Final
+|    |         +--- org.jboss.logging:jboss-logging:3.2.1.Final -> 3.3.0.Final
+|    |         \--- com.fasterxml:classmate:1.1.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    +--- org.springframework:spring-web:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    \--- org.springframework:spring-webmvc:4.2.6.RELEASE
+|         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-core:4.2.6.RELEASE
+|         +--- org.springframework:spring-expression:4.2.6.RELEASE (*)
+|         \--- org.springframework:spring-web:4.2.6.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-sleuth-zipkin-stream: -> 1.0.1.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-aop:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjweaver:1.8.9 -> 1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjrt:1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-stream:1.0.1.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE (*)
+|    |    \--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE
+|    |         +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE
+|    |         |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |         |    \--- org.springframework.boot:spring-boot-actuator:1.3.5.RELEASE
+|    |         |         +--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |         |         +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
+|    |         |         +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |         \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |         +--- org.springframework:spring-messaging:4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE
+|    |         |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |         |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-tuple:1.0.0.RELEASE
+|    |         |    +--- com.esotericsoftware:kryo-shaded:3.0.3
+|    |         |    |    +--- com.esotericsoftware:minlog:1.3.0
+|    |         |    |    \--- org.objenesis:objenesis:2.1
+|    |         |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |    \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.integration:spring-integration-tuple:1.0.0.RELEASE
+|    |         |    +--- org.springframework:spring-tuple:1.0.0.RELEASE (*)
+|    |         |    \--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |         \--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-cloud-connectors:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.2.RELEASE
+|    |    |    +--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    |    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-heroku-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    \--- org.springframework.cloud:spring-cloud-localconfig-connector:1.2.2.RELEASE
+|    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |         \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    +--- io.zipkin.java:zipkin-server:1.1.1
+|    |    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE (*)
+|    |    \--- io.zipkin.java:zipkin:1.1.1
+|    \--- io.zipkin.java:zipkin-autoconfigure-storage-mysql:1.1.1
+|         +--- io.zipkin.java:zipkin-storage-mysql:1.1.1
+|         |    +--- io.zipkin.java:zipkin:1.1.1
+|         |    \--- org.jooq:jooq:3.8.2 -> 3.7.3
+|         +--- org.mariadb.jdbc:mariadb-java-client:1.4.5 -> 1.2.3
+|         |    \--- net.java.dev.jna:jna:3.3.0
+|         +--- com.zaxxer:HikariCP:2.4.6 -> 2.4.5
+|         |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.12
+|         \--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-stream-binder-rabbit: -> 1.0.2.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE (*)
+|    +--- org.springframework.cloud:spring-cloud-stream-codec:1.0.2.RELEASE
+|    |    +--- com.esotericsoftware:kryo-shaded:3.0.3 (*)
+|    |    \--- com.fasterxml.jackson.core:jackson-annotations:2.6.6 -> 2.7.5
+|    +--- org.springframework.boot:spring-boot-starter-amqp:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.6.RELEASE
+|    |         +--- org.springframework:spring-messaging:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework.amqp:spring-amqp:1.5.6.RELEASE
+|    |         |    \--- org.springframework:spring-core:4.2.2.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    |         +--- org.springframework:spring-tx:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:http-client:1.0.0.RELEASE
+|    |         |    +--- org.apache.httpcomponents:httpclient:4.3.6 -> 4.4.1 (*)
+|    |         |    \--- com.fasterxml.jackson.core:jackson-databind:2.5.1 -> 2.7.5 (*)
+|    |         +--- org.springframework:spring-web:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:amqp-client:3.5.7
+|    |         \--- org.springframework:spring-context:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    +--- org.springframework.integration:spring-integration-amqp:4.2.5.RELEASE
+|    |    +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.2.RELEASE -> 1.5.6.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE (*)
++--- mysql:mysql-connector-java:5.1.29
+\--- org.springframework.boot:spring-boot-starter-jdbc: -> 1.3.5.RELEASE
+     +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+     +--- org.apache.tomcat:tomcat-jdbc:8.0.33
+     |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+     \--- org.springframework:spring-jdbc:4.2.6.RELEASE
+          +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+          +--- org.springframework:spring-core:4.2.6.RELEASE
+          \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+
+testCompile - Compile classpath for source set 'test'.
++--- commons-codec:commons-codec:1.8
++--- org.projectlombok:lombok:1.16.6
++--- commons-collections:commons-collections:3.2
++--- org.apache.commons:commons-lang3:3.3.2
++--- org.apache.httpcomponents:httpcore:4.4.1
++--- org.apache.httpcomponents:httpclient:4.4.1
+|    +--- org.apache.httpcomponents:httpcore:4.4.1
+|    \--- commons-codec:commons-codec:1.9 -> 1.8
++--- org.slf4j:slf4j-api:1.7.12
++--- com.nurkiewicz.asyncretry:asyncretry:0.0.7
+|    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.12
++--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-databind:2.7.5
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.5
+|    \--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-annotations:2.7.5
++--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.7
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.7
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.20 -> 1.7.12
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.21
+|    |    |         \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.3.5.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.0.33
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.springframework.boot:spring-boot-starter-validation:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.hibernate:hibernate-validator:5.2.4.Final
+|    |         +--- javax.validation:validation-api:1.1.0.Final
+|    |         +--- org.jboss.logging:jboss-logging:3.2.1.Final -> 3.3.0.Final
+|    |         \--- com.fasterxml:classmate:1.1.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    +--- org.springframework:spring-web:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    \--- org.springframework:spring-webmvc:4.2.6.RELEASE
+|         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-core:4.2.6.RELEASE
+|         +--- org.springframework:spring-expression:4.2.6.RELEASE (*)
+|         \--- org.springframework:spring-web:4.2.6.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-sleuth-zipkin-stream: -> 1.0.1.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-aop:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjweaver:1.8.9 -> 1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjrt:1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-stream:1.0.1.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE (*)
+|    |    \--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE
+|    |         +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE
+|    |         |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |         |    \--- org.springframework.boot:spring-boot-actuator:1.3.5.RELEASE
+|    |         |         +--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |         |         +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
+|    |         |         +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |         \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |         +--- org.springframework:spring-messaging:4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE
+|    |         |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |         |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-tuple:1.0.0.RELEASE
+|    |         |    +--- com.esotericsoftware:kryo-shaded:3.0.3
+|    |         |    |    +--- com.esotericsoftware:minlog:1.3.0
+|    |         |    |    \--- org.objenesis:objenesis:2.1
+|    |         |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |    \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.integration:spring-integration-tuple:1.0.0.RELEASE
+|    |         |    +--- org.springframework:spring-tuple:1.0.0.RELEASE (*)
+|    |         |    \--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |         \--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-cloud-connectors:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.2.RELEASE
+|    |    |    +--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    |    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-heroku-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    \--- org.springframework.cloud:spring-cloud-localconfig-connector:1.2.2.RELEASE
+|    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |         \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    +--- io.zipkin.java:zipkin-server:1.1.1
+|    |    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE (*)
+|    |    \--- io.zipkin.java:zipkin:1.1.1
+|    \--- io.zipkin.java:zipkin-autoconfigure-storage-mysql:1.1.1
+|         +--- io.zipkin.java:zipkin-storage-mysql:1.1.1
+|         |    +--- io.zipkin.java:zipkin:1.1.1
+|         |    \--- org.jooq:jooq:3.8.2 -> 3.7.3
+|         +--- org.mariadb.jdbc:mariadb-java-client:1.4.5 -> 1.2.3
+|         |    \--- net.java.dev.jna:jna:3.3.0
+|         +--- com.zaxxer:HikariCP:2.4.6 -> 2.4.5
+|         |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.12
+|         \--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-stream-binder-rabbit: -> 1.0.2.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE (*)
+|    +--- org.springframework.cloud:spring-cloud-stream-codec:1.0.2.RELEASE
+|    |    +--- com.esotericsoftware:kryo-shaded:3.0.3 (*)
+|    |    \--- com.fasterxml.jackson.core:jackson-annotations:2.6.6 -> 2.7.5
+|    +--- org.springframework.boot:spring-boot-starter-amqp:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.6.RELEASE
+|    |         +--- org.springframework:spring-messaging:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework.amqp:spring-amqp:1.5.6.RELEASE
+|    |         |    \--- org.springframework:spring-core:4.2.2.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    |         +--- org.springframework:spring-tx:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:http-client:1.0.0.RELEASE
+|    |         |    +--- org.apache.httpcomponents:httpclient:4.3.6 -> 4.4.1 (*)
+|    |         |    \--- com.fasterxml.jackson.core:jackson-databind:2.5.1 -> 2.7.5 (*)
+|    |         +--- org.springframework:spring-web:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:amqp-client:3.5.7
+|    |         \--- org.springframework:spring-context:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    +--- org.springframework.integration:spring-integration-amqp:4.2.5.RELEASE
+|    |    +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.2.RELEASE -> 1.5.6.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE (*)
++--- mysql:mysql-connector-java:5.1.29
++--- org.springframework.boot:spring-boot-starter-jdbc: -> 1.3.5.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    +--- org.apache.tomcat:tomcat-jdbc:8.0.33
+|    |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+|    \--- org.springframework:spring-jdbc:4.2.6.RELEASE
+|         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-core:4.2.6.RELEASE
+|         \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-test:1.3.5.RELEASE
+|    +--- junit:junit:4.12 -> 4.11
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.mockito:mockito-core:1.10.19
+|    |    +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+|    |    \--- org.objenesis:objenesis:2.1
+|    +--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    \--- org.springframework:spring-test:4.2.6.RELEASE
+|         \--- org.springframework:spring-core:4.2.6.RELEASE
++--- junit:junit:4.11 (*)
++--- org.assertj:assertj-core:3.0.0
+\--- org.mockito:mockito-core:1.10.19 (*)
+
+testRuntime - Runtime classpath for source set 'test'.
++--- commons-codec:commons-codec:1.8
++--- org.projectlombok:lombok:1.16.6
++--- commons-collections:commons-collections:3.2
++--- org.apache.commons:commons-lang3:3.3.2
++--- org.apache.httpcomponents:httpcore:4.4.1
++--- org.apache.httpcomponents:httpclient:4.4.1
+|    +--- org.apache.httpcomponents:httpcore:4.4.1
+|    \--- commons-codec:commons-codec:1.9 -> 1.8
++--- org.slf4j:slf4j-api:1.7.12
++--- com.nurkiewicz.asyncretry:asyncretry:0.0.7
+|    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.12
++--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-databind:2.7.5
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.5
+|    \--- com.fasterxml.jackson.core:jackson-core:2.7.5
++--- com.fasterxml.jackson.core:jackson-annotations:2.7.5
++--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.7
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.7
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.20 -> 1.7.12
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.21
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.21
+|    |    |         \--- org.slf4j:slf4j-api:1.7.21 -> 1.7.12
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.3.5.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.0.33
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.springframework.boot:spring-boot-starter-validation:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.hibernate:hibernate-validator:5.2.4.Final
+|    |         +--- javax.validation:validation-api:1.1.0.Final
+|    |         +--- org.jboss.logging:jboss-logging:3.2.1.Final -> 3.3.0.Final
+|    |         \--- com.fasterxml:classmate:1.1.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    +--- org.springframework:spring-web:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    \--- org.springframework:spring-webmvc:4.2.6.RELEASE
+|         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-core:4.2.6.RELEASE
+|         +--- org.springframework:spring-expression:4.2.6.RELEASE (*)
+|         \--- org.springframework:spring-web:4.2.6.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-sleuth-zipkin-stream: -> 1.0.1.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-aop:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjweaver:1.8.9 -> 1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    \--- org.aspectj:aspectjrt:1.8.4
+|    +--- org.springframework.cloud:spring-cloud-sleuth-stream:1.0.1.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-sleuth-core:1.0.1.RELEASE (*)
+|    |    \--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE
+|    |         +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE
+|    |         |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |         |    \--- org.springframework.boot:spring-boot-actuator:1.3.5.RELEASE
+|    |         |         +--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |         |         +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
+|    |         |         +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |         +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |         \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |         +--- org.springframework:spring-messaging:4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE
+|    |         |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |         |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE
+|    |         |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-tuple:1.0.0.RELEASE
+|    |         |    +--- com.esotericsoftware:kryo-shaded:3.0.3
+|    |         |    |    +--- com.esotericsoftware:minlog:1.3.0
+|    |         |    |    \--- org.objenesis:objenesis:2.1
+|    |         |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |         |    +--- com.fasterxml.jackson.core:jackson-databind:2.6.6 -> 2.7.5 (*)
+|    |         |    \--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         +--- org.springframework.integration:spring-integration-tuple:1.0.0.RELEASE
+|    |         |    +--- org.springframework:spring-tuple:1.0.0.RELEASE (*)
+|    |         |    \--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |         \--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-cloud-connectors:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.2.RELEASE
+|    |    |    +--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    |    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    +--- org.springframework.cloud:spring-cloud-heroku-connector:1.2.2.RELEASE
+|    |    |    \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    |    \--- org.springframework.cloud:spring-cloud-localconfig-connector:1.2.2.RELEASE
+|    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |         \--- org.springframework.cloud:spring-cloud-core:1.2.2.RELEASE
+|    +--- io.zipkin.java:zipkin-server:1.1.1
+|    |    +--- org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-actuator:1.3.5.RELEASE (*)
+|    |    \--- io.zipkin.java:zipkin:1.1.1
+|    \--- io.zipkin.java:zipkin-autoconfigure-storage-mysql:1.1.1
+|         +--- io.zipkin.java:zipkin-storage-mysql:1.1.1
+|         |    +--- io.zipkin.java:zipkin:1.1.1
+|         |    \--- org.jooq:jooq:3.8.2 -> 3.7.3
+|         +--- org.mariadb.jdbc:mariadb-java-client:1.4.5 -> 1.2.3
+|         |    \--- net.java.dev.jna:jna:3.3.0
+|         +--- com.zaxxer:HikariCP:2.4.6 -> 2.4.5
+|         |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.12
+|         \--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-stream-binder-rabbit: -> 1.0.2.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-stream:1.0.2.RELEASE (*)
+|    +--- org.springframework.cloud:spring-cloud-stream-codec:1.0.2.RELEASE
+|    |    +--- com.esotericsoftware:kryo-shaded:3.0.3 (*)
+|    |    \--- com.fasterxml.jackson.core:jackson-annotations:2.6.6 -> 2.7.5
+|    +--- org.springframework.boot:spring-boot-starter-amqp:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.6.RELEASE
+|    |         +--- org.springframework:spring-messaging:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- org.springframework.amqp:spring-amqp:1.5.6.RELEASE
+|    |         |    \--- org.springframework:spring-core:4.2.2.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework.retry:spring-retry:1.1.2.RELEASE (*)
+|    |         +--- org.springframework:spring-tx:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:http-client:1.0.0.RELEASE
+|    |         |    +--- org.apache.httpcomponents:httpclient:4.3.6 -> 4.4.1 (*)
+|    |         |    \--- com.fasterxml.jackson.core:jackson-databind:2.5.1 -> 2.7.5 (*)
+|    |         +--- org.springframework:spring-web:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    |         +--- com.rabbitmq:amqp-client:3.5.7
+|    |         \--- org.springframework:spring-context:4.2.2.RELEASE -> 4.2.6.RELEASE (*)
+|    +--- org.springframework.integration:spring-integration-amqp:4.2.5.RELEASE
+|    |    +--- org.springframework.integration:spring-integration-core:4.2.5.RELEASE (*)
+|    |    \--- org.springframework.amqp:spring-rabbit:1.5.2.RELEASE -> 1.5.6.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-starter-logging:1.3.5.RELEASE (*)
++--- mysql:mysql-connector-java:5.1.29
++--- org.springframework.boot:spring-boot-starter-jdbc: -> 1.3.5.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE (*)
+|    +--- org.apache.tomcat:tomcat-jdbc:8.0.33
+|    |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+|    \--- org.springframework:spring-jdbc:4.2.6.RELEASE
+|         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|         +--- org.springframework:spring-core:4.2.6.RELEASE
+|         \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-test:1.3.5.RELEASE
+|    +--- junit:junit:4.12 -> 4.11
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.mockito:mockito-core:1.10.19
+|    |    +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+|    |    \--- org.objenesis:objenesis:2.1
+|    +--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    \--- org.springframework:spring-test:4.2.6.RELEASE
+|         \--- org.springframework:spring-core:4.2.6.RELEASE
++--- junit:junit:4.11 (*)
++--- org.assertj:assertj-core:3.0.0
+\--- org.mockito:mockito-core:1.10.19 (*)
+
+(*) - dependencies omitted (listed previously)
+
+BUILD SUCCESSFUL
+
+Total time: 6.391 secs

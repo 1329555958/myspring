@@ -1,4 +1,3 @@
-
 dependencyManagement {
     imports {
         mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1'
@@ -10,6 +9,10 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
 //    compile 'org.springframework.cloud:spring-cloud-stream-rxjava'
     compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
-    compile 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+
+    //与下面的只能二选一，否则就冲突了
+//    compile 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    compile 'org.springframework.cloud:spring-cloud-sleuth-stream'
+    compile project(":util")
 //    compile 'org.springframework.cloud:spring-boot-configuration-processor'
 }

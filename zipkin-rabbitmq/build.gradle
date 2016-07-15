@@ -12,8 +12,8 @@ dependencies {
 
 //    compile 'org.springframework.boot:spring-boot-starter-jdbc'
 //    compile 'io.zipkin.java:zipkin-autoconfigure-ui'
-//    compile "mysql:mysql-connector-java"
-
+    compile "mysql:mysql-connector-java:5.1.29"
+    compile "org.springframework.boot:spring-boot-starter-jdbc"
 
 //    compile 'org.springframework.cloud:spring-cloud-stream-rxjava'
 //    compile 'org.springframework.cloud:spring-cloud-starter-sleuth'

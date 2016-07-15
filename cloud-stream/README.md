@@ -12,6 +12,19 @@ http://cloud.spring.io/spring-cloud-static/spring-cloud.html#_connecting_multipl
 不同应用之间传递消息需要，source的output与sink的input相同；
 同一个应用要使用聚合应用https://github.com/1329555958/spring-cloud-samples/tree/master/double
 
+# Zipkin stream
+zipkin数据收集可能会成为瓶颈，所以通过spring cloud stream的方式收集，将追踪数据通过stream发送到Rabbitmq；另起一台服务器去消费消息并把这些数据存储起来；
+- 应用内存储Zipkin
+添加依赖`compile 'org.springframework.cloud:spring-cloud-sleuth-zipkin'`就可以了
+配置Zipkin地址`spring.zipkin.baseUrl= http://10.5.16.14:9411/`
+- 将Zipkin数据发送到stream
+将上面的依赖去掉，添加依赖`compile 'org.springframework.cloud:spring-cloud-sleuth-stream'`
+配置Rabbitmq地址就行了
+```
+spring.rabbitmq.host=10.5.16.14
+spring.rabbitmq.port=5672
+```
+
 # 常见问题
 * 绑定端口时映射失败
 docker0: iptables: No chain/target/match by that name.

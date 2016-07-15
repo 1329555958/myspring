@@ -1,0 +1,18 @@
+
+
+spring:
+  datasource:
+    schema: classpath:/mysql.sql
+    url: jdbc:mysql://10.5.16.14/zipkin
+    username: root
+    password: wch123
+# Switch this on to create the schema on startup:
+    initialize: true
+    continueOnError: true
+  sleuth:
+    enabled: false
+zipkin:
+  storage:
+    type: mysql
+server:
+  port: 7001
