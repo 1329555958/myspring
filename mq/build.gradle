@@ -1,7 +1,9 @@
 apply plugin: 'war'
 
-
+print("${springVersion}")
 dependencies {
     compile 'com.github.briandilley.jsonrpc4j:jsonrpc4j:1.4.4'
-
+    compile "org.springframework:spring-jms"
+    compile "org.apache.activemq:activemq-broker"
+    compile project(":util")
 }

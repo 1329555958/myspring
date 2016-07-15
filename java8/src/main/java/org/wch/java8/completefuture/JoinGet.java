@@ -1,6 +1,5 @@
 package org.wch.java8.completefuture;
 
-import javassist.bytecode.CodeAttribute;
 
 import java.util.concurrent.CompletableFuture;
 

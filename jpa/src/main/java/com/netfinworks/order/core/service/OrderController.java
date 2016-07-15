@@ -2,13 +2,13 @@ package com.netfinworks.order.core.service;
 
 import com.netfinworks.order.core.entity.OrderEntity;
 import com.netfinworks.order.core.repository.OrderRepository;
-import com.netfinworks.util.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.wch.util.JSONUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -47,7 +47,8 @@ public class OrderController {
         orderEntity.setUpdateAt(new Date());
         repository.save(orderEntity);
 
-        log.info("save-{}", JSONUtil.toJson(repository.findFirstByOrderNoAndChanNo(orderEntity.getOrderNo(), orderEntity.getChanNo())));
+        log.info("save-{}", JSONUtil.toJson(repository.findFirstByOrderNoAndChanNo(orderEntity.getOrderNo(), orderEntity
+                .getChanNo())));
 
         orderEntity.setProductName("update");
         repository.save(orderEntity);

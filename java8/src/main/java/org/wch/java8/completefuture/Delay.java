@@ -1,6 +1,5 @@
 package org.wch.java8.completefuture;
 
-import javassist.bytecode.CodeAttribute;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -32,7 +31,7 @@ public class Delay<T> implements Runnable {
             future.complete(result);
             Thread.sleep(delay);
             future.obtrudeValue(obtrude);
-            future.obtrudeException(new CodeAttribute.RuntimeCopyException("has completed"));
+            future.obtrudeException(new RuntimeException("has completed"));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

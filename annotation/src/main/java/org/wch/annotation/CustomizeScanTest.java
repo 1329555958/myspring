@@ -9,7 +9,8 @@ import org.wch.annotation.annotation.ScanClass;
 @Configuration
 public class CustomizeScanTest {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext();
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new
+                AnnotationConfigApplicationContext();
         annotationConfigApplicationContext.register(CustomizeScanTest.class);
         annotationConfigApplicationContext.register(BeanScannerConfigurer.class);
         annotationConfigApplicationContext.refresh();

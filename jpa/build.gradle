@@ -1,3 +1,5 @@
 apply from: "$rootDir/querydsl.gradle"
 
-group = 'jpa'
+dependencies {
+    compile project(":util")
+}
