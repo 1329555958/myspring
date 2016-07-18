@@ -21,7 +21,7 @@ public class RemoteHelloController {
         ServiceInstance instance = client.getLocalServiceInstance();
         // 随机睡眠1000毫秒以内
         try {
-            Thread.sleep(new Random().nextInt(1000));
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
