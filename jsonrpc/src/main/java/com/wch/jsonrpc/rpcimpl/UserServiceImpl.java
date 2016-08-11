@@ -25,8 +25,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByIdAndName(String id, String name) {
         System.out.println("rpc service 1");
-        User user = service2.findUserByName(name);
-        user.setId(id);
+        User user =  new User();//service2.findUserByName(name);
+        user.setName("wch");
+        user.setId("123");
         return user;
     }
 
