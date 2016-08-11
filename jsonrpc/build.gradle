@@ -12,7 +12,7 @@ repositories {
     mavenLocal()
 }
 dependencies {
-    compile 'com.github.wch.jsonrpc4j:jsonrpc4j:2.0.1'
+    compile 'com.netfinworks.jsonrpc:jsonrpc:1.0.2'
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     compile 'org.springframework.cloud:spring-cloud-starter-ribbon'
     compile 'org.springframework.cloud:spring-cloud-starter-sleuth'

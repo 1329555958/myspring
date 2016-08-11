@@ -19,7 +19,7 @@ public class Client {
     public static void main(String[] args) {
         JsonRpcHttpClient client = null;
         try {
-            client = new JsonRpcHttpClient(new URL("http://localhost:10010/com/wch/jsonrpc/server/UserService"));
+            client = new JsonRpcHttpClient(new URL("http://localhost:10010/jsonrpc/com/wch/jsonrpc/server/UserService"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
