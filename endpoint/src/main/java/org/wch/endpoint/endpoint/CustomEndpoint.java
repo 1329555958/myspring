@@ -11,8 +11,8 @@ import org.springframework.context.ApplicationContextAware;
  *         Created on 2016/8/12.
  */
 @ConfigurationProperties(prefix = "endpoints.service", ignoreUnknownFields = false)
-public class CustomEndpoint extends AbstractEndpoint<Content> implements ApplicationContextAware {
-    private ApplicationContext applicationContext;
+public class CustomEndpoint extends AbstractEndpoint<Content> {
+
 
     public CustomEndpoint() {
         super("service");
@@ -20,11 +20,10 @@ public class CustomEndpoint extends AbstractEndpoint<Content> implements Applica
 
     @Override
     public Content invoke() {
-        return applicationContext.getBean(Content.class);
+        Content content = new Content();
+        content.getServices().add("sdfasdf");
+        return content;
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+
 }

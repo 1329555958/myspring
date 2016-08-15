@@ -1,13 +1,14 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:10001/eureka/,http://localhost:10002/eureka/
+      defaultZone: http://10.5.16.14:10002/eureka/
+#      http://localhost:10001/eureka/,http://localhost:10002/eureka/
 
 spring:
   application:
-    name: test-client
+    name: cccc
   zipkin:
-    base-url: http://10.5.16.14:9411/
+    base-url: http://10.5.16.14:9511/
     enabled: true
   sleuth:
     sampler:
@@ -17,9 +18,9 @@ server:
   port: 10003
 
 ## ribbon直接映射注册到eureka的服务
-ribbon:
-  eureka:
-    enabled: true
+#ribbon:
+#  eureka:
+#    enabled: true
 
 zuul:
   ignoredServices: '*'
@@ -33,5 +34,4 @@ netflix:
 
 logging:
   level:
-    info:
-     developerblog: debug
+    com.netflix: debug

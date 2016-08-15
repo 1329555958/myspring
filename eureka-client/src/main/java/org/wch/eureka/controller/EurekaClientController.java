@@ -3,9 +3,11 @@ package org.wch.eureka.controller;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import info.developerblog.spring.thrift.annotation.ThriftClient;
+import org.apache.commons.collections.MapUtils;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +26,14 @@ public class EurekaClientController {
 
     @Autowired
     private LoadBalancerClient loadBalancerClient;
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     @RequestMapping("hello")
     public String hello() {
-
-        ServiceInstance instance = loadBalancerClient.choose("test-service");
-        System.out.println(instance.getUri() + ":" + instance.getPort() + ":" + instance.getServiceId());
+        ServiceInstance instance = loadBalancerClient.choose("h5");
+        System.out.println(MapUtils.getString(instance.getMetadata(), "context-path", ""));
+        System.out.println(instance.getUri() + "-" + instance.getHost() + ":" + instance.getPort() + ":" + instance.getServiceId());
         return "hello eureka";
     }
 

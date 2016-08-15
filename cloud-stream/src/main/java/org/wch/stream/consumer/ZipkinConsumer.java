@@ -11,7 +11,6 @@ import org.wch.util.JSONUtil;
  * Created by weichunhe on 2016/7/15.
  */
 @EnableBinding(SleuthSink.class)
-@MessageEndpoint
 public class ZipkinConsumer {
 
     @ServiceActivator(inputChannel = SleuthSink.INPUT)

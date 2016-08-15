@@ -13,4 +13,5 @@ include 'config-client'
 include 'util'
 include 'config-repo'
 include 'zipkin-rabbitmq'
+include 'endpoint'
 

@@ -1,9 +1,11 @@
 package com.wch.jsonrpc.domain;
 
+import java.util.ArrayList;
+
 /**
  * Created by weichunhe on 2016/5/23.
  */
-public class User {
+public class User implements UserInf {
     private int age;
     private String name;
     private String id;

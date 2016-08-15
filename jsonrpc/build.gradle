@@ -12,7 +12,9 @@ repositories {
     mavenLocal()
 }
 dependencies {
-    compile 'com.netfinworks.cloud.rpc:rpc:2.0.0'
+    compile 'com.netfinworks.cloud.rpc:rpc:2.0.21-SNAPSHOT'
+    // https://mvnrepository.com/artifact/org.javassist/javassist
+    compile 'org.javassist:javassist:3.20.0-GA'
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     compile 'org.springframework.cloud:spring-cloud-starter-ribbon'
     compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
