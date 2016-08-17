@@ -12,7 +12,7 @@ eureka:
 zuul:
   host:
     max-per-route-connections: 20
-# 调用成功时下次继续调用此节点
+# 服务节点是否可重试，当服务节点不可用时，会进行下一节点的重试
   retryable: true
   # 所有路径的前缀 /zl/service/evenerror
   prefix: /zl
@@ -23,7 +23,7 @@ zuul:
   ignored-patterns: /**/admin/**
   routes:
   # 前缀就是** 之前的所有字符串，不输入** 就可能不行了
-    test-service: /service/evenerror/**
+    test-service: /service/**
     service2:
       path: /service2/**
       url: http://localhost:10004/
@@ -43,9 +43,9 @@ zuul:
 
 #https://github.com/Netflix/Hystrix/wiki/Configuration#CommandExecution
 # 使用zuul做代理时，当服务节点不可用时，zuul会自动切换到另一个节点进行重试，但hystrix会产生超时异常，配置可以禁用超时
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        timeout:
-#          enabled : false
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled : false
