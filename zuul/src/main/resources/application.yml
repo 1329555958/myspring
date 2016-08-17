@@ -14,21 +14,23 @@ zuul:
     max-per-route-connections: 20
 # 调用成功时下次继续调用此节点
   retryable: true
-  # 所有路径的前缀
-#  prefix: zuul
+  # 所有路径的前缀 /zl/service/evenerror
+  prefix: /zl
 #  strip-prefix: true
   # 忽略整个服务,除了后面明确指定的
   ignored-services: '*'
   # 忽略服务中指定的路径
   ignored-patterns: /**/admin/**
   routes:
-    test-service: /service/**
+  # 前缀就是** 之前的所有字符串，不输入** 就可能不行了
+    test-service: /service/evenerror/**
     service2:
       path: /service2/**
       url: http://localhost:10004/
     service3:
       path: /service3/**
       serviceId: test-service
+      # 前缀一起当做URL代理过去
       stripPrefix: false
 
 # ribbon 配置 DefaultClientConfigImpl   CommonClientConfigKey
