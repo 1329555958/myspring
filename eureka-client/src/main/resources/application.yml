@@ -1,14 +1,14 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://10.5.16.14:10002/eureka/
+      defaultZone: http://localhost:10001/eureka/
 #      http://localhost:10001/eureka/,http://localhost:10002/eureka/
 
 spring:
   application:
-    name: cccc
+    name: test-client
   zipkin:
-    base-url: http://10.5.16.14:9511/
+    base-url: http://10.5.16.14:9411/
     enabled: true
   sleuth:
     sampler:

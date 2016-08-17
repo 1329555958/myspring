@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: zuul
+  sleuth:
+    hystrix:
+      strategy:
+        enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+zuul:
+  host:
+    max-per-route-connections: 20
+# 调用成功时下次继续调用此节点
+  retryable: true
+  # 所有路径的前缀
+#  prefix: zuul
+#  strip-prefix: true
+  # 忽略整个服务,除了后面明确指定的
+  ignored-services: '*'
+  # 忽略服务中指定的路径
+  ignored-patterns: /**/admin/**
+  routes:
+    test-service: /service/**
+    service2:
+      path: /service2/**
+      url: http://localhost:10004/
+    service3:
+      path: /service3/**
+      serviceId: test-service
+      stripPrefix: false
+
+# ribbon 配置 DefaultClientConfigImpl   CommonClientConfigKey
+#test-service:
+#  ribbon:
+#  # 此服务实例调用成功了，下MaxAutoRetries次继续调用
+#    OkToRetryOnAllOperations: true
+#    MaxAutoRetriesNextServer: 1
+#    MaxAutoRetries: 1
+
+#https://github.com/Netflix/Hystrix/wiki/Configuration#CommandExecution
+# 使用zuul做代理时，当服务节点不可用时，zuul会自动切换到另一个节点进行重试，但hystrix会产生超时异常，配置可以禁用超时
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled : false
