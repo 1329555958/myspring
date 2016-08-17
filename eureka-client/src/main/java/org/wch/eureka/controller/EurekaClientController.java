@@ -31,7 +31,9 @@ public class EurekaClientController {
 
     @RequestMapping("hello")
     public String hello() {
+        long start = System.currentTimeMillis();
         ServiceInstance instance = loadBalancerClient.choose("h5");
+        System.out.println(System.currentTimeMillis() - start);
         System.out.println(MapUtils.getString(instance.getMetadata(), "context-path", ""));
         System.out.println(instance.getUri() + "-" + instance.getHost() + ":" + instance.getPort() + ":" + instance.getServiceId());
         return "hello eureka";
