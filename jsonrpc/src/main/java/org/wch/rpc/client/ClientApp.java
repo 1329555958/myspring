@@ -26,11 +26,11 @@ public class ClientApp {
         SpringApplication.run(ClientApp.class);
     }
 
-    @Bean
-    public AutoRpcServiceExporter autoJsonRpcServiceExporter() {
-        AutoRpcServiceExporter.addImplScanPackage(UserServiceImpl2.class.getName());
-        return new AutoRpcServiceExporter();
-    }
+//    @Bean
+//    public AutoRpcServiceExporter autoJsonRpcServiceExporter() {
+//        AutoRpcServiceExporter.addImplScanPackage(UserServiceImpl2.class.getName());
+//        return new AutoRpcServiceExporter();
+//    }
 
 
     @Bean

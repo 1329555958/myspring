@@ -1,19 +1,14 @@
 package com.wch.jsonrpc.client;
 
-import com.googlecode.jsonrpc4j.JsonRpcClient;
 import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
 import com.googlecode.jsonrpc4j.ProxyUtil;
-import com.wch.jsonrpc.Classes;
 import com.wch.jsonrpc.rpcimpl.UserServiceImpl;
 import com.wch.jsonrpc.server.UserService;
 import javassist.*;
 import javassist.bytecode.CodeAttribute;
 import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.wch.util.JSONUtil;
 
 import java.lang.reflect.Method;
@@ -64,7 +59,7 @@ public class Client {
             LocalVariableTableParameterNameDiscoverer u =
                     new LocalVariableTableParameterNameDiscoverer();
 
-            System.out.println(method.getName() + ":" +JSONUtil.toJson(u.getParameterNames(method)));
+            System.out.println(method.getName() + ":" + JSONUtil.toJson(u.getParameterNames(method)));
             Parameter[] parameters = method.getParameters();
             Class[] params = method.getParameterTypes();
             for (Parameter param : parameters) {

@@ -36,10 +36,11 @@ zuul:
 # ribbon 配置 DefaultClientConfigImpl   CommonClientConfigKey
 #test-service:
 #  ribbon:
-#  # 此服务实例调用成功了，下MaxAutoRetries次继续调用
+#  # 此服务实例调用成功了,继续调用
 #    OkToRetryOnAllOperations: true
+# retryable 为true时，当节点挂了，会自动重试本节点或者下一节点的次数
 #    MaxAutoRetriesNextServer: 1
-#    MaxAutoRetries: 1
+#    MaxAutoRetries: 0
 
 #https://github.com/Netflix/Hystrix/wiki/Configuration#CommandExecution
 # 使用zuul做代理时，当服务节点不可用时，zuul会自动切换到另一个节点进行重试，但hystrix会产生超时异常，配置可以禁用超时
