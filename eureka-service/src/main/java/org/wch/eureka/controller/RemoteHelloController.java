@@ -38,8 +38,8 @@ public class RemoteHelloController {
 
     @RequestMapping("/evenerror")
     public String evenError(String name) {
-        System.out.println(count + "-----");
-        Assert.isTrue(count++ % 2 != 0, "even error");
+        System.out.println(count++ + "-----");
+//        Assert.isTrue(count++ % 2 != 0, "even error");
         return "hello:" + name;
     }
 

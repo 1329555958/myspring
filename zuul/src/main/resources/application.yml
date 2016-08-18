@@ -49,3 +49,6 @@ hystrix:
       execution:
         timeout:
           enabled : false
+logging:
+  level:
+    com.netflix: debug
