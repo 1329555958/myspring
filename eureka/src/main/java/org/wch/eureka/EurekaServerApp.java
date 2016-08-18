@@ -1,11 +1,15 @@
 package org.wch.eureka;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.netflix.eureka.server.event.EurekaInstanceCanceledEvent;
+import org.springframework.cloud.netflix.eureka.server.event.EurekaInstanceRegisteredEvent;
 import org.springframework.cloud.task.configuration.EnableTask;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -41,8 +45,11 @@ public class EurekaServerApp {
         }
     }
 
+    @Autowired
+    ApplicationContext context;
+
     @Scheduled(cron = "0,30 * * * *  ?")
     public void print() {
-        System.out.println("cron");
+//        System.out.println("cron");
     }
 }

@@ -12,4 +12,5 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
     compile 'org.springframework.cloud:spring-cloud-starter-zipkin'
     compile 'org.springframework.cloud:spring-cloud-task-core:1.0.0.RC1'
+    compile project(":util")
 }
