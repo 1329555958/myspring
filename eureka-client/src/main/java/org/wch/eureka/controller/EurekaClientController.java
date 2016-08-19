@@ -2,9 +2,7 @@ package org.wch.eureka.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import info.developerblog.spring.thrift.annotation.ThriftClient;
 import org.apache.commons.collections.MapUtils;
-import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -12,9 +10,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.wch.eureka.thrift.HelloWorldService;
-
-import java.util.Objects;
 
 /**
  * Created by weichunhe on 2016/6/21.
@@ -65,14 +60,14 @@ public class EurekaClientController {
         return "timeout";
     }
 
-    @ThriftClient(serviceId = "test-service", path = "/thrift")
-    HelloWorldService.Client client;
-
-    @RequestMapping("/thrift")
-    public Object thrift(String name) throws TException {
-        System.out.println("thrift:" + name);
-        return client.sayHello(name);
-    }
+//    @ThriftClient(serviceId = "test-service", path = "/thrift")
+//    HelloWorldService.Client client;
+//
+//    @RequestMapping("/thrift")
+//    public Object thrift(String name) throws TException {
+//        System.out.println("thrift:" + name);
+//        return client.sayHello(name);
+//    }
 
     @Autowired
     RestTemplate restTemplate;

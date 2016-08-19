@@ -18,6 +18,7 @@ spring:
     sampler:
       percentage: 1.0
 
+
 ## eureka server相关配置
 eureka:
   server:
