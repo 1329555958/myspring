@@ -1,7 +1,8 @@
 package com.wch.jsonrpc;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.wch.jsonrpc.domain.User;
+import com.wch.jsonrpc.domain.UserInf;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,5 +17,15 @@ public class Controller {
         Map map = new HashMap();
         map.put("contentType", "application/json");
         return map;
+    }
+
+    @RequestMapping(value = "/hello/{name}")
+    public Object pathValue(@PathVariable String name, Integer age) {
+        return "hello," + name + ";you are " + age;
+    }
+
+    @RequestMapping("/user")
+    public Object user(User user) {
+        return user.getName();
     }
 }

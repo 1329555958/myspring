@@ -2,6 +2,7 @@ package com.wch.jsonrpc;
 
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcClientProxyCreator;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceExporter;
+import com.netfinworks.cloud.rpc.Util;
 import com.netfinworks.cloud.rpc.endpoint.ServiceContent;
 import com.netfinworks.cloud.rpc.spring.AutoRpcClientProxyCreator;
 import com.netfinworks.cloud.rpc.spring.AutoRpcServiceExporter;
@@ -35,7 +36,7 @@ public class WebApp {
     public AutoRpcServiceExporter autoJsonRpcServiceExporter() {
         User user = new User();
         user.setName("jsonrpc");
-        ServiceContent.addBean4Inf(UserInf.class, user);
+        Util.addBean4Inf(UserInf.class, user);
         AutoRpcServiceExporter.addImplScanPackage(UserServiceImpl.class.getName());
         return new AutoRpcServiceExporter();
     }
