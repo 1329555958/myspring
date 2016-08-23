@@ -30,17 +30,17 @@ public class WebApp extends WebMvcConfigurerAdapter {
         SpringApplication.run(WebApp.class, args);
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MyInterceptor());
-        super.addInterceptors(registry);
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new MyInterceptor());
+//        super.addInterceptors(registry);
+//    }
 
-    @Bean
-    public InternalResourceViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/jsp/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
+//    @Bean
+//    public InternalResourceViewResolver internalResourceViewResolver() {
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//        viewResolver.setPrefix("/jsp/");
+//        viewResolver.setSuffix(".jsp");
+//        return viewResolver;
+//    }
 }

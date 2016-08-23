@@ -29,12 +29,12 @@ public class ErrCtrl implements ErrorController {
 
     @RequestMapping(value = PATH)
     public ModelAndView error(HttpServletRequest request) {
-        if (HttpRequestUtils.isAjax(request)) {
+//        if (HttpRequestUtils.isAjax(request)) {
 
-            return new ModelAndView(new MappingJackson2JsonView(), getErrorAttributes(request,
-                    false));
-        }
-        return new ModelAndView("/err", "data", getErrorAttributes(request, false));
+        return new ModelAndView(new MappingJackson2JsonView(), getErrorAttributes(request,
+                false));
+//        }
+//        return new ModelAndView("/err", "data", getErrorAttributes(request, false));
     }
 
     private Map<String, Object> getErrorAttributes(HttpServletRequest request,
