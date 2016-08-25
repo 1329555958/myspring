@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodMapping;
@@ -33,7 +34,7 @@ public class Demo {
     private static final String CUSTOM_URL_MAPPING_TYPE = "requestMappingHandlerMapping";
 
     @RequestMapping("/demo/{name}")
-    public String demo(@PathVariable String name, int i) {
+    public String demo(@PathVariable String name, @RequestParam int i) {
         return "demo";
     }
 
