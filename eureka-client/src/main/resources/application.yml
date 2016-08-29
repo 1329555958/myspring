@@ -12,7 +12,7 @@ spring:
   application:
     name: test-client
   zipkin:
-    base-url: http://10.5.16.14:9411/
+#    base-url: http://10.5.16.14:9411/
     enabled: true
   sleuth:
     sampler:

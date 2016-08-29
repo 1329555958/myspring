@@ -5,3 +5,8 @@ classes
 build
 jsonrpc.iml
 webtmpl.iml
+.classpath
+.project
+.settings/
+/bin/
+node_modules
