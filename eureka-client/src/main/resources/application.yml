@@ -1,4 +1,8 @@
 eureka:
+  instance:
+    # 设为空，首页显示IP地址
+    instance-id:
+    prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://localhost:10001/eureka/
