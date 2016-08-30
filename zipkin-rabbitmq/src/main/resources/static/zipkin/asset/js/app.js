@@ -58,7 +58,7 @@ define('app', ['config', 'echarts', 'base'], function (config, echarts) {
             return [dep];
         }
 
-        $urlRouterProvider.when(/^\/?$/, '/echart');
+        $urlRouterProvider.when(/^\/?$/, '/overview');
 
         $stateProvider
         //默认规则配置

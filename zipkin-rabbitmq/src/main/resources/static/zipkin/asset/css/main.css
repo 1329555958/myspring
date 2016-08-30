@@ -19,9 +19,9 @@ body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
     background-color: #FFFFFF;
 }
 
-/*.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {*/
-    /*background-color: #3c8dbc;*/
-/*}*/
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
+    background-color: #3c8dbc;
+}
 
 /*纠正button在form中偏移的问题*/
 .btn-form {
@@ -46,7 +46,7 @@ body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
 }
 
 .form-group-inline {
-    width: 90%;
+    width: 310px;
     display: inline-block;
 }
 
@@ -87,4 +87,8 @@ label.required::after {
 
 .color-danger {
     color: red;
+}
+
+.chart-c {
+    min-height: 600px;
 }

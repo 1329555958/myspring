@@ -5,7 +5,7 @@
  * JQUERY 默认ajax设置
  */
 $.ajaxSetup({
-    // headers: {'Content-type': 'application/json;charset=UTF-8'},
+    headers: {'Content-type': 'application/json;charset=UTF-8', 'accept': 'application/json'},
     beforeSend: function (xhr, setting) {
         setting.url = (APPROOT + setting.url).replace(/\/+/g, '/');
         if (window.CONTENT_TYPE) {
