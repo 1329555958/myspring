@@ -14,7 +14,7 @@
             jquery: BOWER_ROOT + 'AdminLTE/plugins/jQuery/jquery-2.2.3.min',
             angular: BOWER_ROOT + 'angular/angular.min',
             route: BOWER_ROOT + 'angular-ui-router/release/angular-ui-router.min',
-            lodash: BOWER_ROOT + 'lodash/lodash.min',
+            lodash: BOWER_ROOT + 'lodash/dist/lodash.min',
             bootstrap: BOWER_ROOT + 'AdminLTE/bootstrap/js/bootstrap.min',
             datepicker: BOWER_ROOT + 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
             moment: BOWER_ROOT + 'moment/min/moment.min',

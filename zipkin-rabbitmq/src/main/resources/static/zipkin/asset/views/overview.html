@@ -1,5 +1,52 @@
 <div ng-controller="OverviewController">
     <div class="row">
+        <div class="col-md-6">
+            <div class="box box-solid box-default no-margin">
+                <div class="box-header with-border">
+                    <div class="box-title">总览</div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="position: relative;top: -13px;">
+                                <label class="group-label">统计时间</label>
+
+                                <div style="width: 220px;display: inline-block;position: relative;top: 13px;">
+                                    <div class='input-group date'
+                                         my-date-time="{linkSelector:'#dtp1'}">
+                                        <input type='text' class="form-control" ng-model="startDate"/>
+                                        <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                    </div>
+                                </div>
+                                <label>&nbsp;&nbsp;
+                                    至&nbsp;&nbsp;
+                                </label>
+
+                                <div style="width: 220px;display: inline-block;position:relative;top: 13px;">
+                                    <div class='input-group date' my-date-time id="dtp1">
+                                        <input type='text' class="form-control" ng-model="endDate"/>
+                                        <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                    </div>
+                                </div>
+                                &nbsp;&nbsp;
+                                <button class="btn btn-primary" ng-click="analyse();">
+                                    分析<i class="fa fa-spin fa-spinner" ng-show="loading"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>
+                <small>说明:图中节点的大小跟服务被调用次数成正比</small>
+            </p>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-6 chart-c" id="main"></div>
     </div>
 </div>
