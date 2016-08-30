@@ -1,0 +1,75 @@
+<div ng-controller="ServiceDetailController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-solid box-default no-margin">
+                <div class="box-header with-border">
+                    <div class="box-title">服务明细</div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="position: relative;top: -13px;">
+                                <div class="form-group form-group-inline">
+                                    <label style="display: inline;width: auto;">服务名称:</label>
+                                    <select class="form-control" ng-model="serviceId">
+                                        <option ng-repeat="s in services" value="{{s}}" ng-selected="s==serviceId"
+                                                selected="selected">
+                                            {{s}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <label class="group-label">统计时间:</label>
+                                <div style="width: 220px;display: inline-block;position: relative;top: 13px;">
+                                    <div class='input-group date'
+                                         my-date-time="{linkSelector:'#dtp1'}">
+                                        <input type='text' class="form-control" ng-model="startDate"/>
+                                        <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                    </div>
+                                </div>
+                                <label>&nbsp;&nbsp;
+                                    至&nbsp;&nbsp;
+                                </label>
+
+                                <div style="width: 220px;display: inline-block;position:relative;top: 13px;">
+                                    <div class='input-group date' my-date-time id="dtp1">
+                                        <input type='text' class="form-control" ng-model="endDate"/>
+                                        <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                    </div>
+                                </div>
+                                &nbsp;&nbsp;
+                                <button class="btn btn-primary" ng-click="analyse();">
+                                    分析<i class="fa fa-spin fa-spinner" ng-show="loading"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 chart-c" id="call-cost-chart"></div>
+        <div class="col-md-6">
+            <section>
+                <h3 class="page-header">统计说明:</h3>
+                <h4>共查询到<code>{{callCostStatistics.total}}</code>次调用数据</h4>
+                <h5>耗时TOP 5</h5>
+                <ul>
+                    <li ng-repeat="t in callCostStatistics.top5">
+                        <a ng-href="{{makeTraceUrl(t)}}"
+                           target="_blank">{{t.name}}</a>({{t.xaxis}}),耗时<code>{{t.duration}}</code>ms
+                    </li>
+                    <!--<li>Main Header <code>.main-header</code>. Contains the logo and navbar.</li>-->
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 chart-c" id="call-count-chart"></div>
+    </div>
+</div>
