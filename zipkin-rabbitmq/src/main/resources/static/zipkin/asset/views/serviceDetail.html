@@ -11,7 +11,7 @@
                             <div style="position: relative;top: -13px;">
                                 <div class="form-group form-group-inline">
                                     <label style="display: inline;width: auto;">服务名称:</label>
-                                    <select class="form-control" ng-model="serviceId">
+                                    <select class="form-control" ng-model="serviceId" id="serviceIdSelect">
                                         <option ng-repeat="s in services" value="{{s}}" ng-selected="s==serviceId"
                                                 selected="selected">
                                             {{s}}
@@ -56,7 +56,15 @@
         <div class="col-md-6">
             <section>
                 <h3 class="page-header">统计说明:</h3>
-                <h4>共查询到<code>{{callCostStatistics.total}}</code>次调用数据</h4>
+                <h5>共查询到<code>{{callCostStatistics.total}}</code>次调用数据</h5>
+                <ul>
+                    <li>有<code>{{callCostStatistics.level1Total}}</code>次在<code>[{{callLevel.level1.gte}}</code>,<code>{{callLevel.level1.lt}}</code>)ms之间
+                    </li>
+                    <li>有<code>{{callCostStatistics.level2Total}}</code>次在<code>[{{callLevel.level2.gte}}</code>,<code>{{callLevel.level2.lt}}</code>)ms之间
+                    </li>
+                    <li>有<code>{{callCostStatistics.level3Total}}</code>次在<code>[{{callLevel.level3.gte}}</code>,)ms之间
+                    </li>
+                </ul>
                 <h5>耗时TOP 5</h5>
                 <ul>
                     <li ng-repeat="t in callCostStatistics.top5">

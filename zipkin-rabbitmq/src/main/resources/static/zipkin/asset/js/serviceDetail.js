@@ -6,7 +6,24 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
     $scope.serviceId = searchParam.serviceId;
     $scope.startDate = new Date(searchParam.startDate - 0 || (new Date().getTime() - 7 * 24 * 3600000));
     $scope.endDate = searchParam.endDate ? new Date(searchParam.endDate - 0) : new Date();
-    $scope.callCostStatistics = {total: 0};
+    $scope.callCostStatistics = {total: 0, level1Total: 0, level2Total: 0, level3Total: 0};
+    $scope.callLevel = {
+        level1: {
+            gte: 0,
+            lt: 3000,
+            name: '0-3000'
+        },
+        level2: {
+            gte: 3000,
+            lt: 5000,
+            name: '3000-5000'
+        },
+        level3: {
+            gte: 5000,
+            name: '≥5000'
+        }
+    }
+    ;
     var services = $scope.services = [], denpendencies = [], callCostChartData = [];
 
     var moment = require('moment');
@@ -23,6 +40,10 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             if (!$scope.serviceId) {
                 $scope.serviceId = services[0];
             }
+            setTimeout(function () {
+                $('#serviceIdSelect').val($scope.serviceId);
+            }, 1000);
+
         })).then(function () {
             $scope.loading = false;
             $location.search('startDate', param.startTime);
@@ -43,6 +64,8 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
     }
 
     function loadTraces(param) {
+        var chart = echarts.init($('#call-cost-chart')[0]);
+        chart.showLoading();
         $myhttp.get('api/v1/traces', {
             endTs: param.endTime,
             lookback: param.endTime - param.startTime,
@@ -51,29 +74,53 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
         }, function (data) {
             traces = data;
             console.log(traces);
-            makeCallCostChart(traces);
+            makeCallCostChart(traces, chart);
         });
     }
 
     function statisticCallCost(traces) {
-        $scope.callCostStatistics.total = traces.length;
-        $scope.callCostStatistics.top5 = _.sortBy(traces, 'duration');
-        $scope.callCostStatistics.top5 = $scope.callCostStatistics.top5.slice($scope.callCostStatistics.top5.length - 5).reverse();
+        var callCostStatistics = $scope.callCostStatistics;
+        callCostStatistics.total = traces.length;
+        callCostStatistics.top5 = _.sortBy(traces, 'duration');
+        callCostStatistics.top5 = callCostStatistics.top5.slice(callCostStatistics.top5.length - 5).reverse();
+        callCostStatistics.level1Total = 0; //0 -1000 毫秒
+        callCostStatistics.level2Total = 0;
+        callCostStatistics.level3Total = 0;
+        traces.forEach(function (t) {
+            if (t.duration < $scope.callLevel.level1.lt) {
+                callCostStatistics.level1Total++;
+            } else if (t.duration < $scope.callLevel.level2.lt) {
+                callCostStatistics.level2Total++;
+            } else {
+                callCostStatistics.level3Total++;
+            }
+        });
     }
 
     $scope.makeTraceUrl = function (trace) {
         return 'http://localhost:7001/traces/' + trace.id + '?serviceName=' + $scope.serviceId;
     };
 
-    function makeCallCostChart(traces) {
+    function getCallCostLevelName(duration) {
+        if (duration < $scope.callLevel.level1.lt) {
+            return $scope.callLevel.level1.name;
+        } else if (duration < $scope.callLevel.level2.lt) {
+            return $scope.callLevel.level2.name;
+        } else {
+            return $scope.callLevel.level3.name;
+        }
+    }
+
+    function makeCallCostChart(traces, chart) {
         traces = _.sortBy(traces.map(function (t) {
             return t[0];
         }), 'timestamp');
-        var chart = echarts.init($('#call-cost-chart')[0]);
+
 
         traces.forEach(function (t) {
             t.xaxis = moment(t.timestamp / 1000).format('DD.HH:mm:ss');
             t.value = t.duration;
+            t.category = getCallCostLevelName(t.duration);
         });
 
         statisticCallCost(traces);
@@ -103,12 +150,12 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
                     return html.join('');
                 }
             },
-            // legend: [{
-            //     // selectedMode: 'single',
-            //     data: categories.map(function (a) {
-            //         return a.name;
-            //     })
-            // }],
+            legend: [{
+                // selectedMode: 'single',
+                data: _.map($scope.callLevel, function (a) {
+                    return a.name;
+                })
+            }],
             xAxis: {
                 data: traces.map(function (item) {
                     return item['xaxis'];
@@ -121,19 +168,27 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
+            // visualMap: {
+            //     min: 0,
+            //     max: 10000000,
+            //     calculable: true,
+            //     orient: 'horizontal',
+            //     top: 10,
+            //     right: 10
+            // },
             visualMap: {
                 top: 10,
                 right: 10,
                 pieces: [{
-                    gt: 0,
-                    lte: 1000,
+                    gte: $scope.callLevel.level1.gte,
+                    lt: $scope.callLevel.level1.lt,
                     color: '#096'
                 }, {
-                    gt: 1000,
-                    lte: 3000,
+                    gte: $scope.callLevel.level2.gte,
+                    lt: $scope.callLevel.level2.lt,
                     color: '#ffde33'
                 }, {
-                    gt: 3000,
+                    gte: $scope.callLevel.level3.gte,
                     color: '#cc0033'
                 }],
                 outOfRange: {
@@ -154,34 +209,35 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
                     // },
                     data: traces,
                     // links: links,
-
-                    roam: true,
+                    categories: _.map($scope.callLevel, function (l) {
+                        return l.name;
+                    }), roam: true,
                     label: {
                         normal: {
                             position: 'right',
                             formatter: '{b}'
                         }
-                    },
+                    }
+                    ,
                     lineStyle: {
                         normal: {
                             color: 'source',
                             curveness: 0.4
                         }
-                    },
+                    }
+                    ,
                     markLine: {
                         silent: true,
                         data: [{
-                            yAxis: 1000
+                            yAxis: $scope.callLevel.level1.lt
                         }, {
-                            yAxis: 3000
-                        }, {
-                            yAxis: 5000
+                            yAxis: $scope.callLevel.level2.lt
                         }]
                     }
                 }
             ]
         };
-
+        chart.hideLoading();
 // 使用刚指定的配置项和数据显示图表。
         chart.setOption(option);
     }
