@@ -26,6 +26,7 @@ public class RemoteHelloController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        Assert.isTrue(++count % 3 != 0, count + " is error!");
         long cost = System.currentTimeMillis() - start;
         String msg =
                 "Remote Hello~ " + instance.getHost() + ", " + instance.getServiceId()
@@ -44,7 +45,7 @@ public class RemoteHelloController {
     }
 
     @RequestMapping("/service3/evenerror")
-    public String service3(String name){
-        return "service3 strip false:"+name;
+    public String service3(String name) {
+        return "service3 strip false:" + name;
     }
 }

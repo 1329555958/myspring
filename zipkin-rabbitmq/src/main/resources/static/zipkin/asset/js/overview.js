@@ -121,8 +121,11 @@ require("app").register.controller("OverviewController", function ($scope, $time
                     html.push('<i class="fa  fa-circle" style="color:' + params.color + '"></i>&nbsp;');
                     html.push(params.name + '<br/>');
                     if (params.dataType === 'node') {
+                        var startTime = moment($scope.startDate).format('x');
+                        var endTime = moment($scope.endDate).format('x');
                         html.push('请求了' + params.data.data.sendTotal + '次<br/>');
-                        html.push('被请求了' + params.data.data.callTotal + '次');
+                        html.push('被请求了' + params.data.data.callTotal + '次<br/>');
+                        html.push('<a href="#/serviceDetail?serviceId=' + params.name + '&startDate=' + startTime + '&endDate=' + endTime + '">查看详情</a>');
                     } else if (params.dataType === 'edge') {
                         html.push('请求了' + params.data.data.callTotal + '次<br/>');
                     }

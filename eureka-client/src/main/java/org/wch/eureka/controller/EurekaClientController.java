@@ -71,9 +71,11 @@ public class EurekaClientController {
 
     @Autowired
     RestTemplate restTemplate;
+    RestTemplate template = new RestTemplate();
 
     @RequestMapping("ribbonHello")
     public String ribbonHello() {
+        System.out.println(template.getForEntity("https://raw.githubusercontent.com/1329555958/myspring/master/cp", String.class).getBody());
         return restTemplate.getForEntity("http://test-service/hello", String.class).getBody();
     }
 
