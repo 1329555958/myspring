@@ -6,24 +6,27 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
     $scope.serviceId = searchParam.serviceId;
     $scope.startDate = new Date(searchParam.startDate - 0 || (new Date().getTime() - 7 * 24 * 3600000));
     $scope.endDate = searchParam.endDate ? new Date(searchParam.endDate - 0) : new Date();
-    $scope.callCostStatistics = {total: 0, level1Total: 0, level2Total: 0, level3Total: 0};
-    $scope.callLevel = {
-        level1: {
+    $scope.callCostStatistics = {total: 0};
+    $scope.callCostLevel = [
+        {
             gte: 0,
             lt: 3000,
-            name: '0-3000'
+            name: '0-3000',
+            color: '#096'
         },
-        level2: {
+        {
             gte: 3000,
             lt: 5000,
-            name: '3000-5000'
+            name: '3000-5000',
+            color: '#ffde33'
         },
-        level3: {
+        {
             gte: 5000,
-            name: '≥5000'
+            lt: 5000,
+            name: '≥5000',
+            color: '#c03'
         }
-    }
-    ;
+    ];
     var services = $scope.services = [], denpendencies = [], callCostChartData = [];
 
     var moment = require('moment');
@@ -78,36 +81,47 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
         });
     }
 
+    /**
+     * 返回耗时最长的调用
+     * @param traces
+     * @returns {number}
+     */
     function statisticCallCost(traces) {
         var callCostStatistics = $scope.callCostStatistics;
         callCostStatistics.total = traces.length;
         callCostStatistics.top5 = _.sortBy(traces, 'duration');
         callCostStatistics.top5 = callCostStatistics.top5.slice(callCostStatistics.top5.length - 5).reverse();
-        callCostStatistics.level1Total = 0; //0 -1000 毫秒
-        callCostStatistics.level2Total = 0;
-        callCostStatistics.level3Total = 0;
-        traces.forEach(function (t) {
-            if (t.duration < $scope.callLevel.level1.lt) {
-                callCostStatistics.level1Total++;
-            } else if (t.duration < $scope.callLevel.level2.lt) {
-                callCostStatistics.level2Total++;
-            } else {
-                callCostStatistics.level3Total++;
-            }
+        return callCostStatistics.top5[0] ? callCostStatistics.top5[0].duration : 0;
+    }
+
+    /**
+     * 对调用耗时数据进行归类
+     * @param traces
+     */
+    function classifyCallCost(traces) {
+        var maxDuration = statisticCallCost(traces);
+        $scope.callCostLevel[$scope.callCostLevel.length - 1].lt = Math.max($scope.callCostLevel[$scope.callCostLevel.length - 1].gte, maxDuration) + 1;
+        var data = {};
+        _.each($scope.callCostLevel, function (l) {
+            data[l.name] = [];
         });
+        _.each(traces, function (t) {
+            var level = getCallCostLevel(t.duration);
+            // _.set(t, 'itemStyle.normal.color', level.color);
+            data[level.name].push(t);
+        });
+        return data;
     }
 
     $scope.makeTraceUrl = function (trace) {
         return 'http://localhost:7001/traces/' + trace.id + '?serviceName=' + $scope.serviceId;
     };
 
-    function getCallCostLevelName(duration) {
-        if (duration < $scope.callLevel.level1.lt) {
-            return $scope.callLevel.level1.name;
-        } else if (duration < $scope.callLevel.level2.lt) {
-            return $scope.callLevel.level2.name;
-        } else {
-            return $scope.callLevel.level3.name;
+    function getCallCostLevel(duration) {
+        for (var i = 0; i < $scope.callCostLevel.length; i++) {
+            if (duration < $scope.callCostLevel[i].lt) {
+                return $scope.callCostLevel[i];
+            }
         }
     }
 
@@ -115,28 +129,27 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
         traces = _.sortBy(traces.map(function (t) {
             return t[0];
         }), 'timestamp');
-
-
         traces.forEach(function (t) {
             t.xaxis = moment(t.timestamp / 1000).format('DD.HH:mm:ss');
             t.value = t.duration;
-            t.category = getCallCostLevelName(t.duration);
         });
-
-        statisticCallCost(traces);
+        $scope.callCostChartData = chartData = classifyCallCost(traces);
         // 指定图表的配置项和数据
         var option = {
+            color: _.map($scope.callCostLevel, function (l) {
+                return l.color;
+            }),
             title: {
                 text: '耗时(ms)',
                 // subtext: 'Circular layout',
                 // top: 'bottom',
                 left: 'center'
             },
-            dataZoom: [{
-                start: 90
-            }, {
-                type: 'inside'
-            }],
+            // dataZoom: [{
+            //     start: 90
+            // }, {
+            //     type: 'inside'
+            // }],
             tooltip: {
                 enterable: true,
                 formatter: function (params, ticket, callback) {
@@ -150,9 +163,36 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
                     return html.join('');
                 }
             },
+            toolbox: {
+                show: true,
+                top: 10,
+                right: 10,
+                feature: {
+                    mark: {show: true},
+                    dataZoom: {show: true},
+                    // dataView: {show: true, readOnly: false}
+                    restore: {show: true}
+                    // saveAsImage : {show: true}
+                }
+            },
+            xAxis: [
+                {
+                    type: 'value',
+                    scale: true
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: false
+                }
+            ],
             legend: [{
                 // selectedMode: 'single',
-                data: _.map($scope.callLevel, function (a) {
+                top: 50,
+                right: 20,
+                orient: 'vertical',
+                data: _.map($scope.callCostLevel, function (a) {
                     return a.name;
                 })
             }],
@@ -168,74 +208,43 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
-            // visualMap: {
-            //     min: 0,
-            //     max: 10000000,
-            //     calculable: true,
-            //     orient: 'horizontal',
-            //     top: 10,
-            //     right: 10
-            // },
-            visualMap: {
-                top: 10,
-                right: 10,
-                pieces: [{
-                    gte: $scope.callLevel.level1.gte,
-                    lt: $scope.callLevel.level1.lt,
-                    color: '#096'
-                }, {
-                    gte: $scope.callLevel.level2.gte,
-                    lt: $scope.callLevel.level2.lt,
-                    color: '#ffde33'
-                }, {
-                    gte: $scope.callLevel.level3.gte,
-                    color: '#cc0033'
-                }],
-                outOfRange: {
-                    color: '#999'
-                }
-            },
-            series: [
-                {
-                    name: 'Les Miserables',
+            visualMap: [
+                // {
+                //     min: 0,
+                //     max: $scope.callCostLevel[$scope.callCostLevel.length - 1].lt,
+                //     calculable: true,
+                //     // orient: 'horizontal',
+                //     top: 30,
+                //     right: 10,
+                //     controller: {
+                //         outOfRange: {
+                //             color: ['#999'],
+                //             symbolSize: [30, 100]
+                //         },
+                //         inRange: {
+                //             color: ['#009966', 'rgba(3,4,5,0.4)', '#']
+                //         }
+                //     }
+                //
+                // }
+                // ,{
+                //     top: 0,
+                //     left: 10,
+                //     pieces: $scope.callCostLevel,
+                //     orient: 'horizontal',
+                //     top: 10,
+                //     outOfRange: {
+                //         color: '#999'
+                //     }
+                // }
+            ],
+            series: _.map(chartData, function (data, name) {
+                return {
+                    name: name,
                     type: 'scatter',
-                    // layout: 'force',//'circular',
-                    // edgeSymbol: ['none', 'arrow'],
-                    // force: {
-                    //     repulsion: [2000, 2500]
-                    // },
-                    // circular: {
-                    //     rotateLabel: true
-                    // },
-                    data: traces,
-                    // links: links,
-                    categories: _.map($scope.callLevel, function (l) {
-                        return l.name;
-                    }), roam: true,
-                    label: {
-                        normal: {
-                            position: 'right',
-                            formatter: '{b}'
-                        }
-                    }
-                    ,
-                    lineStyle: {
-                        normal: {
-                            color: 'source',
-                            curveness: 0.4
-                        }
-                    }
-                    ,
-                    markLine: {
-                        silent: true,
-                        data: [{
-                            yAxis: $scope.callLevel.level1.lt
-                        }, {
-                            yAxis: $scope.callLevel.level2.lt
-                        }]
-                    }
-                }
-            ]
+                    data: data
+                };
+            })
         };
         chart.hideLoading();
 // 使用刚指定的配置项和数据显示图表。

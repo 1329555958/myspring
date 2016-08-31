@@ -58,12 +58,8 @@
                 <h3 class="page-header">统计说明:</h3>
                 <h5>共查询到<code>{{callCostStatistics.total}}</code>次调用数据</h5>
                 <ul>
-                    <li>有<code>{{callCostStatistics.level1Total}}</code>次在<code>[{{callLevel.level1.gte}}</code>,<code>{{callLevel.level1.lt}}</code>)ms之间
-                    </li>
-                    <li>有<code>{{callCostStatistics.level2Total}}</code>次在<code>[{{callLevel.level2.gte}}</code>,<code>{{callLevel.level2.lt}}</code>)ms之间
-                    </li>
-                    <li>有<code>{{callCostStatistics.level3Total}}</code>次在<code>[{{callLevel.level3.gte}}</code>,)ms之间
-                    </li>
+                    <li ng-repeat="(name,data) in callCostChartData">有<code>{{data.length||0}}</code>次在{{name}}ms之间</li>
+
                 </ul>
                 <h5>耗时TOP 5</h5>
                 <ul>
