@@ -15,4 +15,5 @@ include 'config-repo'
 include 'zipkin-rabbitmq'
 include 'endpoint'
 include 'hazelcast'
+include 'test'
 
