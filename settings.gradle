@@ -16,4 +16,5 @@ include 'zipkin-rabbitmq'
 include 'endpoint'
 include 'hazelcast'
 include 'test'
+include 'aop'
 
