@@ -35,12 +35,12 @@ public class Controller {
     public void init() {
         ClientConfig config = new ClientConfig();
         ClientNetworkConfig networkConfig = config.getNetworkConfig();
-        networkConfig.addAddress("10.5.6.34");
+        networkConfig.addAddress("10.5.6.34:5701");
         instance34 = HazelcastClient.newHazelcastClient(config);
         map34 = instance34.getMap(mapName);
         config = new ClientConfig();
         networkConfig = config.getNetworkConfig();
-        networkConfig.addAddress("10.5.6.35");
+        networkConfig.addAddress("10.5.6.35:5701");
         instance35 = HazelcastClient.newHazelcastClient(config);
         map35 = instance35.getMap(mapName);
     }

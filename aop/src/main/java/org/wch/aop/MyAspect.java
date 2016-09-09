@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  *         Created on 2016/9/5.
  * @version 1.0
  */
-//@Aspect
+@Aspect
 @Component
 public class MyAspect {
 
