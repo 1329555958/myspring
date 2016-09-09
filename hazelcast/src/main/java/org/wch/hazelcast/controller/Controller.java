@@ -8,7 +8,9 @@ import com.hazelcast.core.IMap;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.wch.hazelcast.proxy.MyLifecycleListener;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -29,25 +31,32 @@ public class Controller {
     IMap map34 = null;
     IMap map35 = null;
 
-    String mapName = "largeMap";
+    String mapName = "largeMap2";
 
     @PostConstruct
     public void init() {
         ClientConfig config = new ClientConfig();
         ClientNetworkConfig networkConfig = config.getNetworkConfig();
-        networkConfig.addAddress("10.5.6.34:5701");
+        networkConfig.addAddress("10.5.16.14:5701");
         instance34 = HazelcastClient.newHazelcastClient(config);
         map34 = instance34.getMap(mapName);
         config = new ClientConfig();
         networkConfig = config.getNetworkConfig();
-        networkConfig.addAddress("10.5.6.35:5701");
+        networkConfig.addAddress("10.5.16.14:5702");
         instance35 = HazelcastClient.newHazelcastClient(config);
         map35 = instance35.getMap(mapName);
+        instance34.getLifecycleService().addLifecycleListener(new MyLifecycleListener());
     }
 
 
     @RequestMapping("/set")
-    public Object set(String key, String value) {
+    public Object set(String key, String value, @RequestParam(defaultValue = "false") boolean reset) {
+        System.out.println(instance34.getLifecycleService().isRunning());
+
+        if (reset) {
+            System.out.println("reset");
+            init();
+        }
         map34.put(key, value);
         return "success";
     }

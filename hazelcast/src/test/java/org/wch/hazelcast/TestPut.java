@@ -42,7 +42,7 @@ public class TestPut {
         Map<String, String> param = new HashedMap();
         String url = "http://localhost:2222/set?key={key}&value={value}";
         String result = null;
-        int step = 10000;
+        int step = 100;
         int start = 0 * step;
         for (int i = start; i < start + step; i++) {
             param.put("key", "k" + i);
