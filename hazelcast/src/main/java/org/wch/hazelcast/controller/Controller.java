@@ -38,12 +38,15 @@ public class Controller {
         ClientConfig config = new ClientConfig();
         ClientNetworkConfig networkConfig = config.getNetworkConfig();
         networkConfig.addAddress("10.5.16.14:5701");
+        networkConfig.setConnectionAttemptLimit(5);
+        networkConfig.setConnectionAttemptPeriod(10000);
+        networkConfig.setConnectionTimeout(5000);
         instance34 = HazelcastClient.newHazelcastClient(config);
         map34 = instance34.getMap(mapName);
         config = new ClientConfig();
-        networkConfig = config.getNetworkConfig();
-        networkConfig.addAddress("10.5.16.14:5702");
-        instance35 = HazelcastClient.newHazelcastClient(config);
+//        networkConfig = config.getNetworkConfig();
+//        networkConfig.addAddress("10.5.16.14:5702");
+        instance35 = HazelcastClient.newHazelcastClient();
         map35 = instance35.getMap(mapName);
         instance34.getLifecycleService().addLifecycleListener(new MyLifecycleListener());
     }
