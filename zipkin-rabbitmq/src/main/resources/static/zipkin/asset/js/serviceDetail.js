@@ -121,7 +121,7 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             data[l.name] = [];
         });
         _.each(traces, function (t) {
-            var level = getCallCostLevel(t.duration);
+            var level = getCallCostLevel(t.value);
             // _.set(t, 'itemStyle.normal.color', level.color);
             data[level.name].push(t);
         });
@@ -466,7 +466,7 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
         statisticCallCount(callCountChart);
         var xaxis = [], series = [];
         _.each(callCountChart, function (v, k) {
-            if (v.count > 5) {
+            if (v.count > 1) {
                 series.push(v.count);
                 xaxis.push(k);
             }
