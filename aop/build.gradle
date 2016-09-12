@@ -1,3 +1,8 @@
+repositories {
+    mavenLocal()
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-aop"
+    compile "com.github.wch.jsonrpc4j:jsonrpc4j:2.1.11"
 }
