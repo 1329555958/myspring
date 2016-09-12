@@ -7,6 +7,8 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
     $scope.startDate = new Date(searchParam.startDate - 0 || (new Date().getTime() - 7 * 24 * 3600000));
     $scope.endDate = searchParam.endDate ? new Date(searchParam.endDate - 0) : new Date();
     $scope.callCostStatistics = {total: 0};
+    $scope.callCostDetail = {};
+    $scope.callCountStatistics = {total: 0, top5: []};
     $scope.callCostLevel = [
         {
             gte: 0,
@@ -30,6 +32,18 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
     var services = $scope.services = [], denpendencies = [], callCostChartData = [];
 
     var moment = require('moment');
+    var toolbox = {
+        show: true,
+        top: 10,
+        right: 10,
+        feature: {
+            mark: {show: true},
+            dataZoom: {show: true},
+            // dataView: {show: true, readOnly: false}
+            restore: {show: true}
+            // saveAsImage : {show: true}
+        }
+    };
 
     $scope.analyse = function () {
         $scope.loading = true;
@@ -78,6 +92,7 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             traces = data;
             console.log(traces);
             makeCallCostChart(traces, chart);
+            makeCallCountChart(traces);
         });
     }
 
@@ -114,6 +129,9 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
     }
 
     $scope.makeTraceUrl = function (trace) {
+        if (!trace) {
+            return '#';
+        }
         return 'http://localhost:7001/traces/' + trace.id + '?serviceName=' + $scope.serviceId;
     };
 
@@ -131,7 +149,7 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
         }), 'timestamp');
         traces.forEach(function (t) {
             t.xaxis = moment(t.timestamp / 1000).format('DD.HH:mm:ss');
-            t.value = t.duration;
+            t.value = t.duration / 1000;
         });
         $scope.callCostChartData = chartData = classifyCallCost(traces);
         // 指定图表的配置项和数据
@@ -157,24 +175,13 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
                     html.push('<i class="fa  fa-circle" style="color:' + params.color + '"></i>&nbsp;');
                     html.push(params.data.name + '<br/>');
                     html.push('调用时间:' + moment(params.data.timestamp / 1000).format('YYYY-MM-DD HH:mm:ss') + '<br/>');
-                    html.push('耗时:' + params.data.duration + 'ms<br/>');
+                    html.push('耗时:' + params.data.value + 'ms<br/>');
                     html.push('<a href="' + $scope.makeTraceUrl(params.data) + '" target="_blank">查看详情</a>')
                     console.log(params);
                     return html.join('');
                 }
             },
-            toolbox: {
-                show: true,
-                top: 10,
-                right: 10,
-                feature: {
-                    mark: {show: true},
-                    dataZoom: {show: true},
-                    // dataView: {show: true, readOnly: false}
-                    restore: {show: true}
-                    // saveAsImage : {show: true}
-                }
-            },
+            toolbox: toolbox,
             xAxis: [
                 {
                     type: 'value',
@@ -412,4 +419,227 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
     }
 
     $scope.analyse();
+
+
+    //-------------------------------------------------------------------------------------
+    /*服务数量统计*/
+
+
+    /**
+     * 提取具体的服务调用数据
+     * @param traces
+     */
+    function classifyCallCount(traces) {
+        var callCountData = {};
+        _.each(traces, function (spans) {
+            var data = {};
+            _.each(spans, function (span) {
+                if (!data[span.name]) {
+                    data[span.name] = span;
+                }
+            });
+            _.each(data, function (v, k) {
+                if (!callCountData[k]) {
+                    callCountData[k] = {count: 1, data: [v]};
+                } else {
+                    callCountData[k].count++;
+                    callCountData[k].data.push(v);
+                }
+            });
+        });
+        return callCountData;
+    }
+
+    var callCountChart = {};
+
+    function statisticCallCount(callCountChart) {
+        $scope.callCountStatistics = {total: 0, top5: []};
+        var data = _.values(callCountChart);
+        $scope.callCountStatistics.total = data.length;
+        $scope.callCountStatistics.top5 = _.sortBy(data, 'count').slice(-5).reverse();
+    }
+
+    function makeCallCountChart(traces) {
+        var chart = echarts.init($('#call-count-chart')[0]);
+        chart.showLoading();
+        callCountChart = classifyCallCount(traces);
+        statisticCallCount(callCountChart);
+        var xaxis = [], series = [];
+        _.each(callCountChart, function (v, k) {
+            if (v.count > 5) {
+                series.push(v.count);
+                xaxis.push(k);
+            }
+
+        });
+        var option = {
+            title: {
+                text: '调用数量(次)',
+                // subtext: 'Circular layout',
+                // top: 'bottom',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                },
+                enterable: true,
+                formatter: function (params, ticket, callback) {
+                    params = params[0];
+                    var html = [];
+                    html.push('<i class="fa  fa-circle" style="color:' + params.color + '"></i>&nbsp;');
+                    html.push(params.name + '<br/>');
+                    // html.push('调用时间:' + moment(params.data.timestamp / 1000).format('YYYY-MM-DD HH:mm:ss') + '<br/>');
+                    html.push('调用:' + params.data + '次<br/>');
+                    html.push('<a href="javascript:makeServiceCallDetailChart(\'' + params.name + '\')">查看详情</a>');
+                    console.log(params);
+                    return html.join('');
+                }
+            },
+            toolbox: toolbox,
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: xaxis,
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '访问统计',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: series
+                }
+            ]
+        };
+        chart.hideLoading();
+// 使用刚指定的配置项和数据显示图表。
+        chart.setOption(option);
+    }
+
+    window.makeServiceCallDetailChart = $scope.makeServiceCallDetailChart = function (serviceName) {
+        var chart = echarts.init($('#call-service-detail')[0]);
+        var data = _.sortBy(callCountChart[serviceName].data, 'timestamp');
+        if (!data || !data.length) {
+            alert('没有调用数据可展示!');
+            return;
+        }
+        _.each(data, function (t) {
+            t.xaxis = moment(t.timestamp / 1000).format('DD.HH:mm:ss');
+            t.value = t.duration / 1000;
+        });
+        var max = _.maxBy(data, function (d) {
+            return d.value;
+        }), min = _.minBy(data, function (d) {
+            return d.value;
+        }), avg = _.sumBy(data, function (d) {
+                return d.value
+            }) / data.length;
+        $scope.callCostDetail = {max: max, min: min, avg: avg, total: data.length};
+        var pieces = [
+            {
+                gte: 0,
+                lt: avg,
+                name: '平均值以下',
+                color: '#096'
+            },
+            {
+                gte: avg,
+                lte: max.value,
+                name: '平均值之上',
+                color: '#c03'
+            }
+        ];
+        var option = {
+            title: {
+                text: serviceName,
+                left: 'center'
+            },
+            toolbox: toolbox,
+            tooltip: {
+                trigger: 'axis',
+                enterable: true,
+                formatter: function (params, ticket, callback) {
+                    params = params[0];
+                    var html = [];
+                    html.push('<i class="fa  fa-circle" style="color:' + params.color + '"></i>&nbsp;');
+                    html.push(params.name + '<br/>');
+                    // html.push('调用时间:' + moment(params.data.timestamp / 1000).format('YYYY-MM-DD HH:mm:ss') + '<br/>');
+                    html.push('耗时:' + params.data.value + 'ms<br/>');
+                    html.push('<a href="' + $scope.makeTraceUrl(params.data) + '" target="_blank">查看详情</a>');
+                    console.log(params);
+                    return html.join('');
+                },
+                axisPointer: {
+                    animation: false
+                }
+            },
+            visualMap: [{
+                left: 10,
+                pieces: pieces,
+                orient: 'horizontal',
+                top: 10,
+                outOfRange: {
+                    color: '#999'
+                }
+            }],
+            xAxis: [{
+                type: 'category',
+                splitLine: {
+                    show: false
+                },
+                data: _.map(data, function (d) {
+                    return d.xaxis;
+                })
+            }],
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                splitLine: {
+                    show: false
+                }
+            },
+            series: [{
+                name: '调用数据',
+                type: 'line',
+                // showSymbol: false,
+                // hoverAnimation: false,
+                data: data,
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    lineStyle: {
+                        normal: {
+                            type: 'solid',
+                            color: '#ffde33'
+                        }
+                    },
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }]
+        };
+        chart.setOption(option);
+        $scope.$digest();
+    }
 });
