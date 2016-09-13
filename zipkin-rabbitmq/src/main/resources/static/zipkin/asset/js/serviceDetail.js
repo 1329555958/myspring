@@ -587,6 +587,9 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
                 enterable: true,
                 formatter: function (params, ticket, callback) {
                     params = params[0];
+                    if (!params) {
+                        return '';
+                    }
                     var html = [];
                     html.push('<i class="fa  fa-circle" style="color:' + params.color + '"></i>&nbsp;');
                     html.push(params.name + '<br/>');
@@ -607,7 +610,9 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
                 orient: 'horizontal',
                 top: 10,
                 outOfRange: {
-                    color: '#999'
+                    color: '#999',
+                    opacity: 0,
+                    colorAlpha: 0
                 }
             }],
             xAxis: [{

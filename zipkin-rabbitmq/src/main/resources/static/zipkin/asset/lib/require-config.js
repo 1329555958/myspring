@@ -16,7 +16,7 @@
             route: BOWER_ROOT + 'angular-ui-router/release/angular-ui-router.min',
             lodash: BOWER_ROOT + 'lodash/dist/lodash.min',
             bootstrap: BOWER_ROOT + 'AdminLTE/bootstrap/js/bootstrap.min',
-            datepicker: BOWER_ROOT + 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
+            datepicker: BOWER_ROOT + 'eonasdan-bootstrap-datetimepicker/dist/js/bootstrap-datetimepicker.min',
             moment: BOWER_ROOT + 'moment/min/moment.min',
             extend: LIB + 'angular-extend',
             angular_ace_builds: BOWER_ROOT + 'ace-builds/src-min-noconflict/ace',
