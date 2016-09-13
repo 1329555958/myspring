@@ -10,7 +10,7 @@
                         <div class="col-md-12">
                             <div style="position: relative;top: -13px;">
                                 <div class="form-group form-group-inline">
-                                    <label style="display: inline;width: auto;">服务名称:</label>
+                                    <label style="display: inline;width: auto;">服务节点:</label>
                                     <select class="form-control" ng-model="serviceId" id="serviceIdSelect">
                                         <option ng-repeat="s in services" value="{{s}}" ng-selected="s==serviceId"
                                                 selected="selected">
@@ -93,7 +93,10 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 chart-c" id="call-service-detail"></div>
+        <div class="col-md-6 chart-c" id="call-service-detail">
+
+            <h4 style="text-align: center;margin-top: 30px;">点击上面任意服务的查看详情，即可在这里查看调用耗时折线图</h4>
+        </div>
         <div class="col-md-6" ng-show="callCostDetail.total>0">
             <section>
                 <h3 class="page-header">统计说明:</h3>

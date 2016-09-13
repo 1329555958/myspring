@@ -566,7 +566,7 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             {
                 gte: 0,
                 lt: avg,
-                label: '平均值以下',
+                label: '平均值及以下',
                 color: '#096'
             },
             {

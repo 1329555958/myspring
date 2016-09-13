@@ -1,9 +1,12 @@
 /**
  * Created by weichunhe on 2016/8/29.
  */
-require("app").register.controller("OverviewController", function ($scope, $timeout, $myhttp) {
-    $scope.startDate = new Date(new Date().getTime() - 7 * 24 * 3600000);
-    $scope.endDate = new Date();
+require("app").register.controller("OverviewController", function ($scope, $timeout, $myhttp, $location) {
+
+    var searchParam = $location.search();
+    $scope.startDate = new Date(searchParam.startDate - 0 || (new Date().getTime() - 7 * 24 * 3600000));
+    $scope.endDate = searchParam.endDate ? new Date(searchParam.endDate - 0) : new Date();
+
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init($('#main')[0]);
     var services = [], denpendencies = [];
@@ -22,6 +25,8 @@ require("app").register.controller("OverviewController", function ($scope, $time
         }, function (data) {
             denpendencies = data;
         })).then(function () {
+            $location.search('startDate', param.startTime);
+            $location.search('endDate', param.endTime);
             $scope.loading = false;
             makeChart(denpendencies, services);
         });
