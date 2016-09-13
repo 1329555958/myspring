@@ -553,6 +553,7 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             group = _.groupBy(data, function (d) {
                 return d.value > avg ? 'gt' : 'lte';
             });
+        avg = avg.toFixed(2) - 0;
         $scope.callCostDetail = {
             max: max,
             min: min,
@@ -565,13 +566,13 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             {
                 gte: 0,
                 lt: avg,
-                name: '平均值以下',
+                label: '平均值以下',
                 color: '#096'
             },
             {
                 gte: avg,
                 lte: max.value,
-                name: '平均值之上',
+                label: '平均值之上',
                 color: '#c03'
             }
         ];
@@ -600,6 +601,7 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
                 }
             },
             visualMap: [{
+                type: 'piecewise',
                 left: 10,
                 pieces: pieces,
                 orient: 'horizontal',
