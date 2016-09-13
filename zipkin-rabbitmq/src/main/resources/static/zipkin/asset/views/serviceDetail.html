@@ -100,10 +100,12 @@
                 <h5>{{callCostDetail.max.name}}共被调用了<code>{{callCostDetail.total}}</code>次，平均耗时<code>{{callCostDetail.avg}}</code>ms
                 </h5>
 
-                <h5>最长耗时<a ng-href="{{makeTraceUrl(callCostDetail.max)}}"
-                           target="_blank">{{callCostDetail.max.value}}</a></a>ms</h5>
-                <h5>最短耗时<a ng-href="{{makeTraceUrl(callCostDetail.min)}}"
-                           target="_blank">{{callCostDetail.min.value}}</a>ms</h5>
+                <h5>共<code>{{callCostDetail.gt}}</code>次调用在平均值之上,最长耗时<a ng-href="{{makeTraceUrl(callCostDetail.max)}}"
+                                                                        target="_blank">{{callCostDetail.max.value}}</a></a>
+                    ms</h5>
+                <h5>共<code>{{callCostDetail.lte}}</code>次在平均值及以下,最短耗时<a ng-href="{{makeTraceUrl(callCostDetail.min)}}"
+                                                                        target="_blank">{{callCostDetail.min.value}}</a>ms
+                </h5>
             </section>
         </div>
     </div>

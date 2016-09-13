@@ -544,13 +544,23 @@ require("app").register.controller("ServiceDetailController", function ($scope, 
             t.value = t.duration / 1000;
         });
         var max = _.maxBy(data, function (d) {
-            return d.value;
-        }), min = _.minBy(data, function (d) {
-            return d.value;
-        }), avg = _.sumBy(data, function (d) {
-                return d.value
-            }) / data.length;
-        $scope.callCostDetail = {max: max, min: min, avg: avg, total: data.length};
+                return d.value;
+            }), min = _.minBy(data, function (d) {
+                return d.value;
+            }), avg = _.sumBy(data, function (d) {
+                    return d.value
+                }) / data.length,
+            group = _.groupBy(data, function (d) {
+                return d.value > avg ? 'gt' : 'lte';
+            });
+        $scope.callCostDetail = {
+            max: max,
+            min: min,
+            avg: avg,
+            total: data.length,
+            gt: group.gt ? group.gt.length : 0,
+            lte: group.lte ? group.lte.length : 0
+        };
         var pieces = [
             {
                 gte: 0,
