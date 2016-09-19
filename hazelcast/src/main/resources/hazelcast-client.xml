@@ -20,7 +20,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <network>
         <cluster-members>
-            <address>10.5.16.14:5701</address>
+            <address>10.5.6.34:5701</address>
             <!--<address>10.5.16.14:5702</address>-->
         </cluster-members>
         <!--与集群中每个成员都会有连接-->

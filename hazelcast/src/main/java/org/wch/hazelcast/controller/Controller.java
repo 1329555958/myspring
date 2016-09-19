@@ -20,7 +20,7 @@ import java.util.Map;
  *         Created on 2016/9/1.
  * @version 1.0
  */
-@RestController
+//@RestController
 public class Controller {
 
     @Autowired

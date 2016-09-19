@@ -33,6 +33,10 @@ public class ClientApp {
 //    }
 
 
+    /**
+     *
+     * @return
+     */
     @Bean
     public static AutoRpcClientProxyCreator clientProxyCreator() {
         AutoRpcClientProxyCreator creator = new AutoRpcClientProxyCreator();
@@ -47,11 +51,6 @@ public class ClientApp {
     @ConditionalOnProperty(value = "sample.zipkin.enabled", havingValue = "false")
     public ZipkinSpanReporter spanCollector() {
         System.out.println("sample.zipkin.enabled");
-        return new ZipkinSpanReporter() {
-            @Override
-            public void report(zipkin.Span span) {
-                System.out.println((String.format("Reporting span [%s]", span)));
-            }
-        };
+        return span -> System.out.println((String.format("Reporting span [%s]", span)));
     }
 }
