@@ -17,4 +17,6 @@ include 'endpoint'
 include 'hazelcast'
 include 'test'
 include 'aop'
+include 'logangent'
+include 'fragment'
 

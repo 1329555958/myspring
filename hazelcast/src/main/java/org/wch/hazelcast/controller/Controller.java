@@ -20,7 +20,7 @@ import java.util.Map;
  *         Created on 2016/9/1.
  * @version 1.0
  */
-//@RestController
+@RestController
 public class Controller {
 
     @Autowired
@@ -54,13 +54,16 @@ public class Controller {
 
     @RequestMapping("/set")
     public Object set(String key, String value, @RequestParam(defaultValue = "false") boolean reset) {
-        System.out.println(instance34.getLifecycleService().isRunning());
+        long id = System.currentTimeMillis();
+        System.out.println(id + "--start");
+//        System.out.println(instance34.getLifecycleService().isRunning());
 
         if (reset) {
             System.out.println("reset");
             init();
         }
         map34.put(key, value);
+        System.out.println(id + "--end");
         return "success";
     }
 

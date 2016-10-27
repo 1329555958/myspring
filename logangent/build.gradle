@@ -1,0 +1,10 @@
+group 'org.wch'
+version '2.0.0'
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    compile 'com.vf:finlog:0.0.1-SNAPSHOT'
+}
