@@ -34,7 +34,8 @@ public class JSONUtil {
     static {
         mapper.enable(SerializationFeature.WRITE_NULL_MAP_VALUES);
         mapper.enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
-        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+// 属性可见度只打印public
+//     mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
     }
 
     public static void setDateFormat(DateFormat dateFormat) {

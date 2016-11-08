@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CachingEnumResolver {
+
     //单态实例　一切问题皆由此行引起
     private static final CachingEnumResolver SINGLE_ENUM_RESOLVER = new
             CachingEnumResolver();

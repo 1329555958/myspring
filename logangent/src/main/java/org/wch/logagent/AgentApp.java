@@ -28,6 +28,8 @@ public class AgentApp {
         System.out.println("tid=" + Thread.currentThread().getName());
 
         log.info("app started at {}", System.currentTimeMillis());
+//        System.out.println(LogChain.class.getClassLoader());
+//        System.out.println(HttpURLConnection.class.getClassLoader());
         SpringApplication.run(AgentApp.class);
     }
 
@@ -63,6 +65,7 @@ class LogChainFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String id = req.getHeader("chain-id");
+        System.out.println("filter=====" + id);
         if (!StringUtils.isEmpty(id)) {
             Thread.currentThread().setName(id);
         }

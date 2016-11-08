@@ -1,7 +1,7 @@
 package org.wch.logagent.controller;
 
 import com.vf.agent.log.Agent;
-import com.vf.agent.log.LogChain;
+import com.vf.agent.util.LogChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,16 +36,31 @@ public class HomeController {
     }
 
     @RequestMapping("/header")
-    public String header(HttpServletRequest request) {
+    public String header(HttpServletRequest request, String name) {
         log.info("chain-id=" + LogChain.getId());
-        return request.getHeader("chain-id");
+        trace();
+        System.out.println("header end");
+        return "hello";
     }
 
+    public void trace() {
+        System.out.println("trace");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("trace end");
+    }
 
     public static void main(String[] args) {
         try {
-            testGetFilesFromJarInClassPathWithDirPath();
-        } catch (IOException e) {
+            System.out.println(Thread.currentThread().getContextClassLoader());
+//            java.lang.reflect.Method method = Thread.class.getDeclaredMethod("sleep", new Class[]{long.class, int.class});
+            Class logchain = Thread.currentThread().getContextClassLoader().loadClass("com.vf.agent.util.LogChain");
+            java.lang.reflect.Method method = logchain.getMethod("getId", null);
+            System.out.println(method.invoke(null, null));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -71,5 +86,8 @@ public class HomeController {
             }
         }
 
+
     }
+
+
 }

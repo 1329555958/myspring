@@ -1,5 +1,7 @@
 package org.wch.logagent;
 
+import org.springframework.beans.BeanUtils;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -35,4 +37,7 @@ class MyHttpConnect extends HttpURLConnection {
 
     }
 
+    public static void main(String[] args){
+
+    }
 }
