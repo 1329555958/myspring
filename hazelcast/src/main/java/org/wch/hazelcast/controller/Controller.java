@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.wch.hazelcast.Bean.User;
 import org.wch.hazelcast.proxy.MyLifecycleListener;
+import org.wch.util.JSONUtil;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -31,13 +34,13 @@ public class Controller {
     IMap map34 = null;
     IMap map35 = null;
 
-    String mapName = "largeMap2";
+    String mapName = "UserMapTest";
 
     @PostConstruct
     public void init() {
         ClientConfig config = new ClientConfig();
         ClientNetworkConfig networkConfig = config.getNetworkConfig();
-        networkConfig.addAddress("10.5.16.14:5701");
+        networkConfig.addAddress("10.5.6.34:5701");
         networkConfig.setConnectionAttemptLimit(5);
         networkConfig.setConnectionAttemptPeriod(10000);
         networkConfig.setConnectionTimeout(5000);
@@ -108,5 +111,14 @@ public class Controller {
     @RequestMapping("/get")
     public Object get(String key) {
         return map35.getOrDefault(key, "no-value");
+    }
+
+    public static void main(String[] args) {
+        Controller c = new Controller();
+        c.init();
+//        User u = new User("hazelcast", 10, new Date());
+//        c.map34.put(u.getName(), u); //{"name":"hazelcast","age":10,"birthday":1479454266243}
+        User u = (User) c.map34.get("hazelcast");
+        System.out.println(JSONUtil.toJson(u));
     }
 }

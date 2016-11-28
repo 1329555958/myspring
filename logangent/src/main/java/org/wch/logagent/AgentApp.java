@@ -1,6 +1,8 @@
 package org.wch.logagent;
 
 
+import com.vf.agent.util.LogChain;
+import com.vf.agent.util.TraceChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -32,22 +34,22 @@ public class AgentApp {
 //        System.out.println(HttpURLConnection.class.getClassLoader());
         SpringApplication.run(AgentApp.class);
     }
-
-    @Bean
-    public FilterRegistrationBean loginFilter() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setName("logChain");
-        LogChainFilter filter = new LogChainFilter();
-        registrationBean.setFilter(filter);
-        registrationBean.setOrder(1);
-
-
-        List<String> patterns = new ArrayList<>();
-        patterns.add("/*");
-        registrationBean.setUrlPatterns(patterns);
-
-        return registrationBean;
-    }
+//CIDdd8d1069ad7f4fdf9a97ae10fae33a97
+//    @Bean
+//    public FilterRegistrationBean loginFilter() {
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        registrationBean.setName("logChain");
+//        LogChainFilter filter = new LogChainFilter();
+//        registrationBean.setFilter(filter);
+//        registrationBean.setOrder(1);
+//
+//
+//        List<String> patterns = new ArrayList<>();
+//        patterns.add("/*");
+//        registrationBean.setUrlPatterns(patterns);
+//
+//        return registrationBean;
+//    }
 
 }
 
@@ -55,6 +57,7 @@ public class AgentApp {
  * 日志链
  */
 class LogChainFilter implements Filter {
+    private static Logger log = LoggerFactory.getLogger(LogChainFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -65,10 +68,12 @@ class LogChainFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String id = req.getHeader("chain-id");
-        System.out.println("filter=====" + id);
         if (!StringUtils.isEmpty(id)) {
             Thread.currentThread().setName(id);
         }
+        String traceId = req.getHeader("trace-id");
+        TraceChain.startTrace(traceId);
+        log.info("chain-id={},traceId={}", LogChain.getId(), TraceChain.getTraceId());
         chain.doFilter(request, response);
     }
 

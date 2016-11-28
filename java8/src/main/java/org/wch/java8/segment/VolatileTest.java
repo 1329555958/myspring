@@ -41,4 +41,9 @@ public class VolatileTest {
         }
         System.out.println(race);
     }
+
+
+    public static String concat(String str1, String str2, String s3) {
+        return str1 + str2 + s3;
+    }
 }
