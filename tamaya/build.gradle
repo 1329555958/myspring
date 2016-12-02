@@ -1,0 +1,6 @@
+dependencies {
+    compile "org.apache.tamaya:tamaya-core:0.2-incubating"
+    // https://mvnrepository.com/artifact/org.apache.tamaya.ext/tamaya-injection
+//    compile group: 'org.apache.tamaya.ext', name: 'tamaya-injection', version: '0.2-incubating'
+    compile "org.apache.tamaya.ext:tamaya-injection:0.2-incubating"
+}

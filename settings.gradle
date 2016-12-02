@@ -19,4 +19,6 @@ include 'test'
 include 'aop'
 include 'logangent'
 include 'serviceloader'
+include 'tamaya'
+include 'cxf'
 

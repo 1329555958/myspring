@@ -37,7 +37,7 @@ public class HomeController {
     public Object hello(String name) {
         log.info("hello,your name is {},id={}", name, LogChain.getId());
 
-        log.info("resp={}", template.getForObject("http://localhost:8080/header", String.class));
+//        log.info("resp={}", template.getForObject("http://localhost:8080/header", String.class));
         log.info("resp={}", template.postForObject("http://localhost:8080/header", null, String.class));
         return "hello" + name;
     }
@@ -60,10 +60,10 @@ public class HomeController {
 
     @RequestMapping("/header")
     public String header(HttpServletRequest request, String name) {
-        System.out.println(request.getClass());
+//        System.out.println(request.getClass());
         log.info("chain-id={}", LogChain.getId());
-        trace();
-        System.out.println("header end");
+//        trace();
+//        System.out.println("header end");
         return "hello";
     }
 
