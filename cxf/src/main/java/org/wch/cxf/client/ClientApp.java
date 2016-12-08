@@ -1,5 +1,6 @@
 package org.wch.cxf.client;
 
+import com.vf.agent.util.KafkaUtil;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,15 @@ public class ClientApp {
 
     @RequestMapping("/user/{userId}")
     public User getUser(@PathVariable long userId) {
-        log.info("获取用户,userid={}", userId);
+//        KafkaUtil.printThreadPoolInfo();
+//        long start = System.currentTimeMillis();
+//        int i = 1000;
+//        while (i-- > 0) {
+//            log.info("{}---{}-----{}", userId, i, System.currentTimeMillis());
+//        }
+//        long end = System.currentTimeMillis();
+//        System.out.println(end - start);
+        log.info("find user {}",userId);
         return userService.getUser(userId);
     }
 
