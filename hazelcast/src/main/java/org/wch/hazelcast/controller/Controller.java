@@ -39,8 +39,9 @@ public class Controller {
     @PostConstruct
     public void init() {
         ClientConfig config = new ClientConfig();
+//        credentials config.getCredentials()
         ClientNetworkConfig networkConfig = config.getNetworkConfig();
-        networkConfig.addAddress("10.5.6.34:5701");
+        networkConfig.addAddress("10.65.213.20:5701");
         networkConfig.setConnectionAttemptLimit(5);
         networkConfig.setConnectionAttemptPeriod(10000);
         networkConfig.setConnectionTimeout(5000);
@@ -49,8 +50,8 @@ public class Controller {
         config = new ClientConfig();
 //        networkConfig = config.getNetworkConfig();
 //        networkConfig.addAddress("10.5.16.14:5702");
-        instance35 = HazelcastClient.newHazelcastClient();
-        map35 = instance35.getMap(mapName);
+//        instance35 = HazelcastClient.newHazelcastClient();
+//        map35 = instance35.getMap(mapName);
         instance34.getLifecycleService().addLifecycleListener(new MyLifecycleListener());
     }
 
@@ -116,9 +117,9 @@ public class Controller {
     public static void main(String[] args) {
         Controller c = new Controller();
         c.init();
-//        User u = new User("hazelcast", 10, new Date());
-//        c.map34.put(u.getName(), u); //{"name":"hazelcast","age":10,"birthday":1479454266243}
-        User u = (User) c.map34.get("hazelcast");
-        System.out.println(JSONUtil.toJson(u));
+        User u = new User("hazelcast", 10, new Date());
+        c.map34.put(u.getName(), u); //{"name":"hazelcast","age":10,"birthday":1479454266243}
+        User u2 = (User) c.map34.get("hazelcast");
+        System.out.println(JSONUtil.toJson(u2));
     }
 }

@@ -1,6 +1,5 @@
 package org.wch.cxf.client;
 
-import com.vf.agent.util.KafkaUtil;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.wch.cxf.bean.User;
 import org.wch.cxf.service.UserService;
@@ -42,7 +40,7 @@ public class ClientApp {
 //        }
 //        long end = System.currentTimeMillis();
 //        System.out.println(end - start);
-        log.info("find user {}",userId);
+        log.info("find user {}", userId);
         return userService.getUser(userId);
     }
 

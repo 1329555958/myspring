@@ -1,8 +1,6 @@
 package org.wch.logagent;
 
 
-import com.vf.agent.util.LogChain;
-import com.vf.agent.util.TraceChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -27,7 +25,6 @@ public class AgentApp {
     private static Logger log = LoggerFactory.getLogger(AgentApp.class);
 
     public static void main(String[] args) {
-        System.out.println("tid=" + Thread.currentThread().getName());
 
         log.info("app started at {}", System.currentTimeMillis());
 //        System.out.println(LogChain.class.getClassLoader());
@@ -53,32 +50,32 @@ public class AgentApp {
 
 }
 
-/**
- * 日志链
- */
-class LogChainFilter implements Filter {
-    private static Logger log = LoggerFactory.getLogger(LogChainFilter.class);
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        String id = req.getHeader("chain-id");
-        if (!StringUtils.isEmpty(id)) {
-            Thread.currentThread().setName(id);
-        }
-        String traceId = req.getHeader("trace-id");
-        TraceChain.startTrace(traceId);
-        log.info("chain-id={},traceId={}", LogChain.getId(), TraceChain.getTraceId());
-        chain.doFilter(request, response);
-    }
-
-    @Override
-    public void destroy() {
-
-    }
-}
+///**
+// * 日志链
+// */
+//class LogChainFilter implements Filter {
+//    private static Logger log = LoggerFactory.getLogger(LogChainFilter.class);
+//
+//    @Override
+//    public void init(FilterConfig filterConfig) throws ServletException {
+//
+//    }
+//
+//    @Override
+//    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+//        HttpServletRequest req = (HttpServletRequest) request;
+//        String id = req.getHeader("chain-id");
+//        if (!StringUtils.isEmpty(id)) {
+//            Thread.currentThread().setName(id);
+//        }
+//        String traceId = req.getHeader("trace-id");
+//        TraceChain.startTrace(traceId);
+//        log.info("chain-id={},traceId={}", LogChain.getId(), TraceChain.getTraceId());
+//        chain.doFilter(request, response);
+//    }
+//
+//    @Override
+//    public void destroy() {
+//
+//    }
+//}
