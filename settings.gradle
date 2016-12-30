@@ -22,4 +22,5 @@ include 'serviceloader'
 include 'tamaya'
 include 'cxf'
 include 'kafka'
+include 'mesos'
 

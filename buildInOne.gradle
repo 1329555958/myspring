@@ -1,0 +1,36 @@
+//打包
+task runnbaleJar(type: Jar) {
+    from files(sourceSets.main.output.classesDir)
+    from configurations.runtime.asFileTree.files.collect { zipTree(it) }
+    manifest {
+        attributes 'Main-Class': 'org.wch.kafka.consumers.MyConsumer'
+    }
+}
+//设置编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+//http://www.cnblogs.com/yongtao/p/4104526.html
+jar {
+    manifest {
+        attributes("Implementation-Title": project.name)
+        attributes("Implementation-Version": version)
+        attributes("Main-Class": "org.wch.kafka.consumers.MyConsumer")
+    }
+}
+
+task addDependToManifest << {
+    if (!configurations.runtime.isEmpty()) {
+        jar.manifest.attributes('Class-Path': ". manageer_lib/" + configurations.runtime.collect {
+            it.name
+        }.join(' manager_lib/'))
+    }
+}
+jar.dependsOn += addDependToManifest
+
+task copyDependencies(type: Copy) {
+    from configurations.runtime
+    destinationDir = file('build/libs/manager_lib')
+}
+jar.dependsOn += copyDependencies

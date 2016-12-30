@@ -1,0 +1,12 @@
+//打包
+task runnbaleJar(type: Jar) {
+    from files(sourceSets.main.output.classesDir)
+    from configurations.runtime.asFileTree.files.collect { zipTree(it) }
+    manifest {
+        attributes 'Main-Class': 'org.wch.mesos.MesosApp'
+    }
+}
+//设置编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
