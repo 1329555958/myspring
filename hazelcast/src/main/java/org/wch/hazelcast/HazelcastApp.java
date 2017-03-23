@@ -5,6 +5,7 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.hazelcast.HazelcastKeyValueAdapter;
 import org.springframework.data.hazelcast.repository.config.EnableHazelcastRepositories;
@@ -21,7 +22,7 @@ import java.util.HashMap;
 
 @SpringBootApplication
 @EnableHazelcastRepositories("org.wch.hazelcast.repository")
-public class HazelcastApp {
+public class HazelcastApp extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(HazelcastApp.class);
     }

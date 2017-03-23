@@ -1,3 +1,5 @@
+
+ext.mainClassName = 'org.wch.hazelcast.HazelcastApp'
 dependencies {
     compile 'com.hazelcast:hazelcast:3.7'
     compile 'com.hazelcast:hazelcast-client:3.7'
@@ -5,3 +7,6 @@ dependencies {
     compile 'com.hazelcast:spring-data-hazelcast:1.0'
     compile project(":util")
 }
+//bootRepackage {
+//    mainClass = 'org.wch.hazelcast.HazelcastApp'
+//}
