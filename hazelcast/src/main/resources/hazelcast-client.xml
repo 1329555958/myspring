@@ -18,6 +18,7 @@
 <hazelcast-client xsi:schemaLocation="http://www.hazelcast.com/schema/client-config hazelcast-client-config-3.6.xsd"
                   xmlns="http://www.hazelcast.com/schema/client-config"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
     <network>
         <cluster-members>
             <address>10.5.77.11:5701</address>
