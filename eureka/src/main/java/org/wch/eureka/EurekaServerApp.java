@@ -18,7 +18,7 @@ import java.util.Date;
 
 @SpringBootApplication
 @EnableEurekaServer
-@EnableTask
+//@EnableTask
 public class EurekaServerApp {
 
     public static void main(String[] args) {

@@ -11,6 +11,7 @@ import org.springframework.data.hazelcast.HazelcastKeyValueAdapter;
 import org.springframework.data.hazelcast.repository.config.EnableHazelcastRepositories;
 import org.springframework.data.keyvalue.core.KeyValueOperations;
 import org.springframework.data.keyvalue.core.KeyValueTemplate;
+import org.wch.hazelcast.topic.Sample;
 
 import java.util.HashMap;
 
@@ -24,7 +25,8 @@ import java.util.HashMap;
 @EnableHazelcastRepositories("org.wch.hazelcast.repository")
 public class HazelcastApp extends SpringBootServletInitializer {
     public static void main(String[] args) {
-        SpringApplication.run(HazelcastApp.class);
+        Sample.main(args);
+//        SpringApplication.run(HazelcastApp.class);
     }
 
     @Bean

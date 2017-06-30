@@ -18,9 +18,7 @@ import org.wch.hazelcast.proxy.MyLifecycleListener;
 import org.wch.util.JSONUtil;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author weichunhe
@@ -67,9 +65,17 @@ public class HazelcastController {
     @RequestMapping("/clear")
     public int clean() {
         int size = map.size();
+
+        Iterator<String> it = map.keySet().iterator();
+        String key = it.next();
         map.clear();
         log.info("clear map size={}", size);
         return size;
     }
 
+    public static void main(String[] args){
+        Random random = new  Random();
+        System.out.println(random.nextInt(2));
+
+    }
 }

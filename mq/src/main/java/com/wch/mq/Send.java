@@ -29,7 +29,8 @@ public class Send {
         message.setId(System.currentTimeMillis() + "");
         message.setName("activemq名称");
 
-        jmsTemplate.convertAndSend(DESTINATION, JSONUtil.toJson(message));
+        jmsTemplate.convertAndSend(DESTINATION, message);
+
         return message;
     }
 }

@@ -5,6 +5,7 @@ import com.wch.mq.rpc.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,6 +14,7 @@ import java.net.URL;
  * Created by weichunhe on 2016/3/14.
  */
 @SpringBootApplication
+@EnableScheduling
 public class WebApp {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(WebApp.class, args);

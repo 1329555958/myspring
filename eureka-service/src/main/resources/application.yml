@@ -1,4 +1,12 @@
 eureka:
+  instance:
+#    instance-id: host-${eureka.instance.hostname}:${eureka.instance.non-secure-port}
+    prefer-ip-address: true
+
+    # 下面的变量可以使用环境变量进行设置eureka.instance.non-secure-port
+#    non-secure-port: 1122
+#    ip-address: ${envirment.ip}
+#    hostname:
   client:
     serviceUrl:
       defaultZone: http://localhost:10001/eureka/
@@ -22,3 +30,5 @@ logging:
   level:
     info:
      developerblog: debug
+#    org:
+#      springframework: debug

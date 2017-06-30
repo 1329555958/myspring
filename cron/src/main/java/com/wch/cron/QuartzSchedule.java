@@ -14,7 +14,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 /**
  * Created by weichunhe on 2016/5/20.
  */
-@Configuration
+//@Configuration
 public class QuartzSchedule implements Job {
     private static Logger log = LoggerFactory.getLogger(QuartzSchedule.class);
 

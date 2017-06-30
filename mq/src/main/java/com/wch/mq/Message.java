@@ -1,9 +1,11 @@
 package com.wch.mq;
 
+import java.io.Serializable;
+
 /**
  * Created by weichunhe on 2016/5/19.
  */
-public class Message {
+public class Message implements Serializable {
 
     private String id, name;
 

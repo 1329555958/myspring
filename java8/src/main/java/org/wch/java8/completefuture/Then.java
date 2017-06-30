@@ -2,6 +2,8 @@ package org.wch.java8.completefuture;
 
 import org.wch.java8.CompletableFetureTest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -10,8 +12,10 @@ import java.util.concurrent.ExecutionException;
  */
 public class Then {
     public static void main(String[] args) {
-        com();
+//        com();
 //        eithor();
+        of();
+        System.out.println("endqq");
     }
 
     public static void callback() {
@@ -35,9 +39,13 @@ public class Then {
         CompletableFuture<Integer> value3 = CompletableFetureTest.getValue3();
         CompletableFuture<Integer> value4 = CompletableFetureTest.getValue4();
 
-        CompletableFuture.anyOf(value1, value2, value3, value4);
+//        CompletableFuture.anyOf(value4,value1, value2, value3).join();
         //到这里至少一个任务执行完成了
-        CompletableFuture.allOf(value1, value2, value3, value4);
+        List<CompletableFuture<Integer>> batch = new ArrayList<>();
+        batch.add(value1);
+        batch.add(value2);batch.add(value3);batch.add(value4);
+        CompletableFuture.allOf(batch.toArray(new CompletableFuture[0])).join();
+        System.out.println("end");
         //到这里至少所有任务都执行完成了
     }
 

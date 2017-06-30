@@ -1,8 +1,12 @@
 package com.wch.encrypt;
 
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+import java.security.SecureRandom;
 
 /**
  * Created by weichunhe on 2016/4/29.
@@ -119,10 +123,52 @@ public class DES {
         return (byte) "0123456789ABCDEF".indexOf(c);
     }
 
+    public static String encrypt2(String src, String password) {
+        try {
+            // DES算法要求有一个可信任的随机数源
+            SecureRandom random = new SecureRandom();
+            // 创建一个DESKeySpec对象
+            DESKeySpec desKey = new DESKeySpec(password.getBytes());
+            // 创建一个密匙工厂
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            // 将DESKeySpec对象转换成SecretKey对象
+            SecretKey securekey = keyFactory.generateSecret(desKey);
+            // Cipher对象实际完成解密操作
+            Cipher cipher = Cipher.getInstance("DES");
+            // 用密匙初始化Cipher对象
+            cipher.init(Cipher.ENCRYPT_MODE, securekey, random);
+            // 真正开始解密操作
+            return byteArr2HexStr(cipher.doFinal(hexStringToBytes(src)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public static String dencrypt2(String src, String password) {
+        try {
+            // DES算法要求有一个可信任的随机数源
+            SecureRandom random = new SecureRandom();
+            // 创建一个DESKeySpec对象
+            DESKeySpec desKey = new DESKeySpec(password.getBytes());
+            // 创建一个密匙工厂
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            // 将DESKeySpec对象转换成SecretKey对象
+            SecretKey securekey = keyFactory.generateSecret(desKey);
+            // Cipher对象实际完成解密操作
+            Cipher cipher = Cipher.getInstance("DES");
+            // 用密匙初始化Cipher对象
+            cipher.init(Cipher.DECRYPT_MODE, securekey, random);
+            // 真正开始解密操作
+            return byteArr2HexStr(cipher.doFinal(hexStringToBytes(src)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public static void main(String[] args) {
         String strIn = "666666";
-        System.out.println(encrypt(strIn));
-        System.out.println(dencrypt("37b8acd28f207ce2"));
+        System.out.println(encrypt2(strIn, "11111111"));
+        System.out.println(dencrypt2("2358f4760b20beaa","11112211"));
     }
 }

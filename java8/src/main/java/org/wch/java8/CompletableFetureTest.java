@@ -26,7 +26,7 @@ public class CompletableFetureTest {
                 e.printStackTrace();
             }
             return 1;
-        }, executor);
+        });
         return future;
     }
 
@@ -41,7 +41,7 @@ public class CompletableFetureTest {
                 e.printStackTrace();
             }
             return 2;
-        }, executor);
+        });
         return future;
     }
 
@@ -56,7 +56,7 @@ public class CompletableFetureTest {
                 e.printStackTrace();
             }
             return 3;
-        }, executor);
+        });
         return future;
     }
 
@@ -71,7 +71,22 @@ public class CompletableFetureTest {
                 e.printStackTrace();
             }
             return 4;
-        }, executor);
+        });
+        return future;
+    }
+    public static CompletableFuture<Integer> getValue(Integer a) {
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            System.out.println(a);
+            try {
+                System.out.println("a4");
+                Thread.currentThread().sleep(600);
+                System.out.println("a44");
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return 4;
+        });
         return future;
     }
 

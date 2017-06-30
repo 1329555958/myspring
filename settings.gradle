@@ -23,4 +23,5 @@ include 'tamaya'
 include 'cxf'
 include 'kafka'
 include 'mesos'
+include 'mycat'
 
