@@ -1,8 +1,8 @@
 buildscript {
     repositories {
+        mavenCentral()
         maven {
-            url "http://nexus.vfinance.cn:9081/content/groups/public/"
-//            url 'http://dl.bintray.com/cjstehno/public'
+            url "https://plugins.gradle.org/m2/"
         }
     }
 
@@ -36,7 +36,7 @@ configure(allprojects) { project ->
 }
 
 repositories {
-    maven { url "http://nexus.vfinance.cn:9081/content/groups/public/" }
+    mavenCentral()
     maven { url "http://repo.spring.io/release" }
 }
 
@@ -48,9 +48,9 @@ subprojects {
     apply plugin: 'spring-boot'
 
     repositories {
-        maven { url "http://nexus.vfinance.cn:9081/content/groups/public/" }
-        maven { url "http://repo.spring.io/release" }
         mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+
     }
 
     dependencies {
@@ -79,7 +79,7 @@ test.dependsOn(subprojects.test)
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-
 task wrapper(type: Wrapper) {
     gradleVersion = '2.8'
 }
+
