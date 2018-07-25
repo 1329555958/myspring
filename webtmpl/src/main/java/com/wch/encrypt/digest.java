@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by weichunhe on 2016/4/29.
  */
-public class Digest {
+class Digest {
     private static Logger log = LoggerFactory.getLogger(Digest.class);
 
     public static void sha1() {

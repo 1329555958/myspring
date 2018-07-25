@@ -12,7 +12,7 @@ import javax.crypto.Cipher;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
-import com.netfinworks.util.RSA;
+//import com.netfinworks.util.RSA;
 
 /**
  * RSA 工具类。提供加密，解密，生成密钥对等方法。 需要bcprov-jdk16-140.jar包。
@@ -37,7 +37,7 @@ public class RSAUtil {
 	public static String decryptJSRsa(String str) {
 		PrivateKey privateKey;
 		try {
-			privateKey = RSA.getPrivateKey(priKeyStr);
+			privateKey = null;//RSA.getPrivateKey(priKeyStr);
 			Cipher cipher = Cipher.getInstance("RSA/NONE/NoPadding",
 					new BouncyCastleProvider());
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
@@ -56,31 +56,31 @@ public class RSAUtil {
 	 * @throws Exception
 	 */
 	public static void rsaTest() throws Exception {
-		KeyFactory factory = KeyFactory.getInstance("RSA",
-				new BouncyCastleProvider());
-
-		byte[] bytes = Base64.getDecoder().decode(pubKeyStr);
-		X509EncodedKeySpec spec = new X509EncodedKeySpec(bytes);
-		RSAPublicKey publicKey = (RSAPublicKey) factory.generatePublic(spec);
-		System.out.println(publicKey.getPublicExponent().toString(16));
-		System.out.println(publicKey.getModulus().toString(16));
-
-		byte[] pirvateBytes = Base64.getDecoder().decode(priKeyStr);
-		PKCS8EncodedKeySpec privateSpec = new PKCS8EncodedKeySpec(pirvateBytes);
-		PrivateKey privateKey = factory.generatePrivate(privateSpec);
-
-		byte[] encode = RSA.encrypt("wch".getBytes(), privateKey);
-		System.out.println(Base64.getEncoder().encodeToString(encode));
-		System.out.println(new String(RSA.decrypt(encode, publicKey)));
-
-		byte[] publicEncode = RSA.encrypt("pubic".getBytes(), publicKey);
-		System.out.println(Base64.getEncoder().encodeToString(publicEncode));
-		System.out.println(new String(RSA.decrypt(publicEncode, privateKey)));
-
-		byte[] sign = RSA.sign("wch".getBytes(), privateKey);
-		System.out.println(Base64.getEncoder().encodeToString(sign));
-
-		System.out.println(RSA.verify("wch".getBytes(), sign, publicKey));
+//		KeyFactory factory = KeyFactory.getInstance("RSA",
+//				new BouncyCastleProvider());
+//
+//		byte[] bytes = Base64.getDecoder().decode(pubKeyStr);
+//		X509EncodedKeySpec spec = new X509EncodedKeySpec(bytes);
+//		RSAPublicKey publicKey = (RSAPublicKey) factory.generatePublic(spec);
+//		System.out.println(publicKey.getPublicExponent().toString(16));
+//		System.out.println(publicKey.getModulus().toString(16));
+//
+//		byte[] pirvateBytes = Base64.getDecoder().decode(priKeyStr);
+//		PKCS8EncodedKeySpec privateSpec = new PKCS8EncodedKeySpec(pirvateBytes);
+//		PrivateKey privateKey = factory.generatePrivate(privateSpec);
+//
+//		byte[] encode = RSA.encrypt("wch".getBytes(), privateKey);
+//		System.out.println(Base64.getEncoder().encodeToString(encode));
+//		System.out.println(new String(RSA.decrypt(encode, publicKey)));
+//
+//		byte[] publicEncode = RSA.encrypt("pubic".getBytes(), publicKey);
+//		System.out.println(Base64.getEncoder().encodeToString(publicEncode));
+//		System.out.println(new String(RSA.decrypt(publicEncode, privateKey)));
+//
+//		byte[] sign = RSA.sign("wch".getBytes(), privateKey);
+//		System.out.println(Base64.getEncoder().encodeToString(sign));
+//
+//		System.out.println(RSA.verify("wch".getBytes(), sign, publicKey));
 	}
 
 	public static void main(String[] args) throws Exception {
