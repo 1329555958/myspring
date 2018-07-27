@@ -24,4 +24,5 @@ include 'cxf'
 include 'kafka'
 include 'mesos'
 include 'mycat'
+include 'jdbc'
 
