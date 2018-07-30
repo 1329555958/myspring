@@ -6,5 +6,6 @@ package org.wch.hazelcast.proxy;
  * @version 1.0
  */
 public interface Animal {
+
     public String name();
 }
