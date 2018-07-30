@@ -16,16 +16,17 @@ public class CglibTest {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(Dog.class);
         enhancer.setCallback(new Cb());
-        Dog dog = (Dog) enhancer.create();
+        Animal dog = (Animal) enhancer.create();
         System.out.println(dog.name());
     }
 }
 
-class Cb implements MethodInterceptor {
+class Cb implements MethodInterceptor{
 
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         System.out.println("cglib final proxy");
         return methodProxy.invokeSuper(o, objects);
     }
+
 }
